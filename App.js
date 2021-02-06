@@ -2,8 +2,8 @@ import React from "react";
 import{SafeAreaView, Image, TouchableWithoutFeedback, Button,Alert,
   TouchableOpacity} from "react-native"
   import {useState, useRef} from 'react';
-  import SwipeUpDown from 'react-native-swipe-up-down';
-  import SlidingUpPanel from 'rn-sliding-up-panel';
+  //import SwipeUpDown from 'react-native-swipe-up-down';
+  //import SlidingUpPanel from 'rn-sliding-up-panel';
  // import Carousel from 'react-native-snap-carousel'
   //import FlatList from 'react-native-web';
   import {StatusBar} from 'expo-status-bar';
@@ -28,12 +28,14 @@ import{SafeAreaView, Image, TouchableWithoutFeedback, Button,Alert,
       DarkTheme as PaperDarkTheme 
     } from 'react-native-paper';
 import SendTokens from "./src/app/screens/SendTokens.js";
-import Home from './src/app/screens/HomeScreen.js'
+import LoginScreen from './src/app/screens/Login.js';
+import Home from './src/app/screens/HomeScreen.js';
+import SignUpScreen from './src/app/screens/SignUp.js';
 
 function App(){
 return (
 
-      <Home/>
+      <SignUpScreen/>
       );
 } 
 export default App;

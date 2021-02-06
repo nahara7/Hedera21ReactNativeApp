@@ -4,10 +4,10 @@ import React from "react";
 import{SafeAreaView, Image, TouchableWithoutFeedback, Button,Alert,
   TouchableOpacity} from "react-native"
   import {useState, useRef} from 'react';
-  import SwipeUpDown from 'react-native-swipe-up-down';
+ // import SwipeUpDown from 'react-native-swipe-up-down';
  import SlidingUpPanel from 'rn-sliding-up-panel';
-  import {StatusBar} from 'expo-status-bar';
-  import NavContainer from './Navigator';
+  //import {StatusBar} from 'expo-status-bar';
+  //import NavContainer from './Navigator';
   import styled from "styled-components/native";
   import {MaterialIcons} from '@expo/vector-icons';
   import {View, 
@@ -16,7 +16,7 @@ import{SafeAreaView, Image, TouchableWithoutFeedback, Button,Alert,
     StyleSheet, 
     Animated,
     FlatList} from 'react-native';
-import {Icon, Container, Header, Content, Right} from 'native-base';
+//import {Icon, Container, Header, Content, Right} from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 //took out class. Getting the hot load error on snack. 
 //expo was crashing try to find the bug. Configure android studio.
@@ -76,13 +76,13 @@ import {useNavigation} from '@react-navigation/native';
             <View style={styles.container}>
              <View style={{paddingTop: 50, paddingHorizontal: 14}}>
              <View>
-                {/*Welcome*/}
-                <View style={{paddingBottom: '10%'}}>
-                    <Text style={{fontSize:26, color: '#fff'}}> Welcome Back,</Text>
-                    <Text style={{fontSize:26, color: '#fff', paddingBottom: 10}}>Gabriel</Text>
+                
+<View style={{paddingBottom: '10%'}}>
+                    <Text style={{fontSize:26, color: 'black'}}> Welcome Back,</Text>
+                    <Text style={{fontSize:26, color: 'black', paddingBottom: 10}}>Gabriel</Text>
                 </View>
             <View>
-                      {/*profile*/}
+                   
                       <Image
                        source={{uri: 'https://scontent.fagc1-2.fna.fbcdn.net/v/t31.0-8/20017494_1570223453010098_2798752839256677297_o.jpg?_nc_cat=108&ccb=2&_nc_sid=730e14&_nc_ohc=Y_mZcslnbsIAX95p6tF&_nc_ht=scontent.fagc1-2.fna&oh=78f39c7c6e0d85e6e503587f409c6d20&oe=603CC6F9' }}
                        style={styles.ProfileImage}
@@ -99,11 +99,11 @@ import {useNavigation} from '@react-navigation/native';
         
           <View style={{paddingBottom: '10%'}}>
                  
-                <Text style={{color: '#fff', opacity: 0.6, marginBottom: 20}}> Account ID</Text>
+                <Text style={{color: '#ff9100', opacity: 0.6, marginBottom: 20}}> Account ID</Text>
                 <View style={{paddingBottom: '10%'}}>
-                 {/*home buttons*/}
+                
                  <View style={{ flexDirection: "row"}}>
-                 <TouchableOpacity>
+                 <TouchableOpacity  >
                  
                 <TouchableOpacity 
                 
@@ -114,31 +114,30 @@ import {useNavigation} from '@react-navigation/native';
                   <MaterialIcons name='add' color= 'white' size={28}  style={{alignSelf:
                   'center'}}/>
                     </View> 
-                    <Text style={{color: "#fff", paddingBottom: '10%'}}> Send</Text>
+                    <Text style={{color: "black", paddingBottom: '10%'}}> Send</Text>
                     
                    
                   </TouchableOpacity>
                   
               </TouchableOpacity>
-                 {/*recieve tokens*/}
-                  <TouchableOpacity style={styles.AddUser}>
-                  
-                  <View style={styles.AddUserIconbg}>
+                <TouchableOpacity style={styles.AddUser}>
+                <View style={styles.AddUserIconbg}>
                   <MaterialIcons name='add' color= 'white' size={28}  style={{alignSelf:
                   'center'}}/>
-                    </View> 
-                    <Text style={{color: "#fff", paddingBottom: '10%'}}> Recieve</Text>
+                  </View> 
+                  <Text style={{color: "black", paddingBottom: '10%'}}> Redeem</Text>
                   </TouchableOpacity>
                  
                  
-                 {/*redeem tokens*/}
-                  <TouchableOpacity style={styles.AddUser}>
-                  
+                
+                 <TouchableOpacity style={ {borderColor: 'white'}}>
+                 <View style={styles.AddUser}>
                   <View style={styles.AddUserIconbg}>
                   <MaterialIcons name='add' color= 'white' size={28}  style={{alignSelf:
                   'center'}}/>
                     </View> 
-                    <Text style={{color: "#fff", paddingBottom: '10%'}}> Redeem </Text>
+                    <Text style={{color: "black", paddingBottom: '10%'}}> Recieve </Text>
+                 </View>
                   </TouchableOpacity>
                  </View>
                 
@@ -150,7 +149,7 @@ import {useNavigation} from '@react-navigation/native';
                    return(
                      <View style={styles.AddUser}>
                       <Image style={styles.AddUserIconbg} source={{uri: item.userImage}}/>
-                      <Text style={{color: '#fff'}}>{item.userName}</Text>
+                      <Text style={{color: 'black', justifyContent: 'center'}}>{ item.userName}</Text>
                      </View>
                    )
                 }}
@@ -160,7 +159,7 @@ import {useNavigation} from '@react-navigation/native';
               </View>
          <View style={{paddingTop:110}}>
           
-          {/*panel for recent transaction*/}
+       
           <View style={{flex: 1}}>
                     <SlidingUpPanel
                     ref={ModalRef}
@@ -171,18 +170,16 @@ import {useNavigation} from '@react-navigation/native';
                     height={height + 20}
                     friction={0.9}
                     >
-               <View style={{flex: 1, backgroundColor: '#0c0c0c', borderRadius: 24, paddingTop: 10}}>
+               <View style={{flex: 1, backgroundColor: 'white', borderColor: 'black', borderRadius: 24, paddingTop: 10}}>
                   <View style={styles.PanelHandle}></View>
                   <View>
-                        <Text style={{marginVertical: 16, color: '#fff'}}>   Recent Transactions</Text>
+                        <Text style={{marginVertical: 16, color: 'black'}}>   Recent Transactions</Text>
                   </View>
-                  
-               <View style={{height: 500, paddingBottom: 10}}>
-                      
-                       <FlatList 
+                  <View style={{height: 500, paddingBottom: 10}}>
+                      <FlatList 
                         data={Users}
                         keyExtractor={item => item.key}
-                        renderItem={({item}) => {
+                         renderItem={({item}) => {
                           return(
                             <View style={styles.PanelItemContainer}>
                                 <View style={{flexDirection: 'row',alignItems: 'center'}}>
@@ -190,12 +187,12 @@ import {useNavigation} from '@react-navigation/native';
                                     <Image source={{uri: item.userImage}} style={styles.PanelImage}  />
                                   </View>
                                     <View>
-                                    <Text style={{fontSize: 14, color: '#fff'}}>{item.userName}</Text>
-                                    <Text style={{fontSize: 10, color: '#fff', opacity: 0.6}}>{item.transactionDate}</Text>
+                                    <Text style={{fontSize: 14, color: 'black'}}>{item.userName}</Text>
+                                    <Text style={{fontSize: 10, color: 'black', opacity: 0.6}}>{item.transactionDate}</Text>
                                   </View>
                                 </View>
                                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                                  <Text style={{fontSize: 16, color: '#fff', marginHorizontal: 2}}>{item.amount}  </Text>
+                                <Text style={{fontSize: 16, color: 'black', marginHorizontal: 2}}>{item.amount} </Text>
         
                                   {item.credit ? (
                                     <MaterialIcons name='arrow-drop-up' size={22} color='green' />
@@ -215,36 +212,27 @@ import {useNavigation} from '@react-navigation/native';
                           <Text style={styles.PanelButtonText}>View Full History</Text>
                         </TouchableOpacity>
                       </View>
-                      
-                    </View>
+                       </View>
                     </SlidingUpPanel>
                   </View>
-                 
-                  </View>
-                  </View>
-                  </View>
+                 </View>
+            </View>
+        </View>
                   
                   
                   );
                }
             
-                  
-        
-            
-        
-         
-        
-        
-         const styles= StyleSheet.create({
+ const styles= StyleSheet.create({
           container: {
             flex: 1,
-            backgroundColor: '#000',
+            backgroundColor: 'white',
             paddingTop:0
           },
         
           ProfileImage:{
-            width: 55,
-            height: 55,
+            width: 80,
+            height: 80,
             borderRadius: 40
           },
           ProfileImageNotification: {
@@ -260,16 +248,19 @@ import {useNavigation} from '@react-navigation/native';
           AddUser:{
             height: 140,
             width: 100,
+            borderColor: 'black',
+            borderWidth: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#0c0c0c',
+            backgroundColor: 'white',
             borderRadius: 10,
             marginRight: 14
           },
           AddUserIconbg: {
             width: 70,
             height: 70,
-            backgroundColor: '#000',
+            backgroundColor: 'orange',
+            borderColor: 'orange',
             borderRadius: 10,
             marginBottom: 10,
             justifyContent: 'center'
