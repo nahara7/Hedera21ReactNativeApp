@@ -1,7 +1,7 @@
 import React from "react";
 import{SafeAreaView, Image, TouchableWithoutFeedback, Button,Alert,
   TouchableOpacity} from "react-native"
-  import {useState, useRef} from 'react';
+  import {useState, useRef, createRef} from 'react';
   //import SwipeUpDown from 'react-native-swipe-up-down';
  //import SlidingUpPanel from 'rn-sliding-up-panel';
  // import Carousel from 'react-native-snap-carousel'
@@ -18,9 +18,68 @@ import{SafeAreaView, Image, TouchableWithoutFeedback, Button,Alert,
     Animated,
     FlatList} from 'react-native';
 
- export default class LoginScreen extends React.Component{
-    render(){
-        return (
+const LoginScreen =(props)=>{
+  var Airtable = require('airtable');
+  Airtable.configure({
+      endpointUrl: 'https://api.airtable.com',
+      apiKey: 'keykefT9YD5rhkuFg'
+  });
+  var base = Airtable.base('appg4L9uWpNhonYHS');
+  const table= base('Users');
+  
+  const data = require('./DataController.js'); 
+  const [userPassword, setUserPassword] = useState('');
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const usernameInputRef=createRef();
+  const passwordInputRef=createRef();
+
+  const findUser = async (email, username) => {
+    console.log('starting search');
+    let recordExists = false;
+    const options = {
+      filterByFormula: `OR(email = '${email}', username = '${username}')`,
+    };
+
+    const users= await data.getAirtableRecords(table, options);
+
+    users.filter(user=>{
+    if (user.get('email')==email || user.get('username')==username){
+      console.log('user exists');
+      return(recordExists= true);
+     
+    }
+    console.log('user does not exists');
+    return (recordExists= false);
+    });
+    return recordExists;
+  };
+
+   /* exports.authenticate=(req, res)=>{
+      const{username, password}=req.body;
+      const options= {
+        filterByFormula: `OR(email='${username}', username= '${username}')`,
+      };
+      data
+        .getAirtableRecords(table,options)
+        .then(users=>{
+          compare(userPassword, user.get('password'), function(err, response){
+            if(response){
+              //add navigator
+              console.log('they match--login')
+            }else{
+              console.log(err)
+              Alert.alert('Your username or password is incorrect');
+            }
+          });
+    })
+  .catch(err=>{
+    console.log(Error(err))
+  });
+};*/
+    
+
+    return (
           <View style={styles.container}>
             <Text style={styles.logo}>TOKA</Text>
             <View style={styles.inputView} >
@@ -28,7 +87,15 @@ import{SafeAreaView, Image, TouchableWithoutFeedback, Button,Alert,
                 style={styles.inputText}
                 placeholder="Username..." 
                 placeholderTextColor="white"
-                onChangeText={text => this.setState({email:text})}/>
+                onChangeText={(UserName)=>
+                  setUserName(UserName)
+              }
+              onSubmitEditing={()=>
+                passwordInputRef.current &&
+                passwordInputRef.current.focus()}
+                blurOnSubmit={false}
+                
+                />
             </View>
             <View style={styles.inputView} >
               <TextInput  
@@ -36,23 +103,36 @@ import{SafeAreaView, Image, TouchableWithoutFeedback, Button,Alert,
                 style={styles.inputText}
                 placeholder="Password..." 
                 placeholderTextColor="white"
-                onChangeText={text => this.setState({password:text})}/>
+                onChangeText={(UserPassword)=>
+                  setUserPassword(UserPassword)
+               }
+               ref={passwordInputRef}
+               
+               />
             </View>
             <TouchableOpacity>
               <Text style={styles.forgot}>Forgot Password?</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.loginBtn}>
-              <Text style={styles.loginText}>LOGIN</Text>
-            </TouchableOpacity>
+            <TouchableOpacity
+            style={[styles.signUpButtonStyle, {marginTop: 150}]}
+            activeOpacity={0.5}
+            onPress={
+              console.log('checking....')
+              //findUser(userEmail, userName)
+            }
+            >
+            <Text style={[styles.loginText, {paddingTop: 10}]}>LOG IN</Text>
+          </TouchableOpacity>
+              
             <TouchableOpacity>
-              <Text style={styles.loginText}>Signup</Text>
+              <Text style={styles.loginText}>Don't have an account? Sign up.</Text>
             </TouchableOpacity>
     
       
           </View>
         );
       }
-    }
+    
     
     const styles = StyleSheet.create({
       container: {
@@ -61,6 +141,19 @@ import{SafeAreaView, Image, TouchableWithoutFeedback, Button,Alert,
         alignItems: 'center',
         justifyContent: 'center',
       },
+      logInButtonStyle: {
+        backgroundColor: 'black',
+        borderWidth: 0,
+        color: 'black',
+        borderColor: '#7DE24E',
+        height: 45,
+        alignItems: 'center',
+        borderRadius: 30,
+        marginLeft: 35,
+        marginRight: 35,
+        marginTop: 20,
+        marginBottom: 20,
+    },
       logo:{
         fontWeight:"bold",
         fontSize:50,
@@ -95,6 +188,6 @@ import{SafeAreaView, Image, TouchableWithoutFeedback, Button,Alert,
         marginBottom:10
       },
       loginText:{
-        color:"white"
-      }
-    });
+      },
+});
+    export default LoginScreen;
