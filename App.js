@@ -35,7 +35,7 @@ import SignUpScreen from './src/app/screens/SignUp.js';
 function App(){
 return (
 
-      <LoginScreen/>
+      <Home/>
       );
 } 
 export default App;

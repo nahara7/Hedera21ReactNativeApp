@@ -34,4 +34,3 @@ const NavStack= createDrawerNavigator({
     
  });
 const NavContainer= createAppContainer(NavStack);*/
-
