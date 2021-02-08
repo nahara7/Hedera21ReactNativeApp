@@ -7,7 +7,6 @@ module.exports = async function (env, arg) {
     const config = await createExpoWebpackConfigAsync({
         ...eval,
         mode: 'development',
-        entry:'./app/app.js',
         output: {
             path:path.resolve('dist'),
             filename: 'bundle.js'
