@@ -1,4 +1,6 @@
-exports.getAirtableRecords = (table, options) => {
+import Airtable from '../airtable'
+
+export default function getAirtableRecords (table, options) {
   let records = [];
   const params = {
     view: "Grid view",
@@ -22,6 +24,6 @@ exports.getAirtableRecords = (table, options) => {
       }
       resolve(records);
     };
-    table.select(params).eachPage(processPage, processRecords);
+    // Airtable.table.select(params).eachPage(processPage, processRecords);
   });
 };

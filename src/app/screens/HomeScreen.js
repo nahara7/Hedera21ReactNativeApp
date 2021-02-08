@@ -23,7 +23,7 @@ import {
   FlatList,
 } from "react-native";
 //import {Icon, Container, Header, Content, Right} from 'native-base';
-import { useNavigation } from "@react-navigation/native";
+
 //took out class. Getting the hot load error on snack.
 //expo was crashing try to find the bug. Configure android studio.
 //take out navigator for now and work on pages seperately for sake of moving forward
@@ -80,6 +80,10 @@ const Home = ({ navigation }) => {
 
   const _draggedValue = new Animated.Value(180);
 
+  function navigateToSendTokens() {
+    navigation.navigate('SendTokens')
+  }
+
   const ModalRef = useRef(null);
 
   return (
@@ -111,7 +115,7 @@ const Home = ({ navigation }) => {
             <View style={{ paddingBottom: "10%" }}>
               <View style={{ flexDirection: "row" }}>
                 <TouchableOpacity>
-                  <TouchableOpacity style={styles.AddUser}>
+                  <TouchableOpacity style={styles.AddUser} onPress={navigateToSendTokens}>
                     <View style={styles.AddUserIconbg}>
                       <MaterialIcons
                         name="add"
