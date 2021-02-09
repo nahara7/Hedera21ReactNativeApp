@@ -1,7 +1,9 @@
+import Airtable from 'airtable';
 
-var Airtable=require('airtable');
 Airtable.configure({
-    endpointUrl: 'https://api.airtable.com',
-    apiKey:' keykefT9YD5rhkuFg'
+  endpointUrl: "https://api.airtable.com",
+  apiKey: " keykefT9YD5rhkuFg",
 });
-var base=appg4L9uWpNhonYHS;
+export var base = Airtable.base('appg4L9uWpNhonYHS');
+
+export default Airtable
