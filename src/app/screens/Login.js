@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useRef, createRef } from "react";
 import {
   SafeAreaView,
   Image,
@@ -7,7 +8,6 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
-import { useState, useRef, createRef } from "react";
 //import SwipeUpDown from 'react-native-swipe-up-down';
 //import SlidingUpPanel from 'rn-sliding-up-panel';
 // import Carousel from 'react-native-snap-carousel'
@@ -25,65 +25,38 @@ import {
   Animated,
   FlatList,
 } from "react-native";
+import {base} from 'airtable'
+
+import Airtable from '../airtable'
+import getAirtableRecords from './getAirtableRecords'
+
+const authenticate = async (email, username) => {
+  console.log("starting search");
+  const table = Airtable.base("Users");
+  const options = {
+    filterByFormula: `OR(email = '${email}', username = '${username}')`,
+  };
+
+  return {}
+  // const users = await getAirtableRecords(table, options);
+  // return users.some((user) => user.get("email") == email || user.get("username") == username)
+};
 
 const LoginScreen = (props) => {
-  var Airtable = require("airtable");
-  Airtable.configure({
-    endpointUrl: "https://api.airtable.com",
-    apiKey: "keykefT9YD5rhkuFg",
-  });
-  var base = Airtable.base("appg4L9uWpNhonYHS");
-  const table = base("Users");
-
-  const data = require("./DataController.js");
+  const {setUser} = props
   const [userPassword, setUserPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const usernameInputRef = createRef();
   const passwordInputRef = createRef();
 
-  const findUser = async (email, username) => {
-    console.log("starting search");
-    let recordExists = false;
-    const options = {
-      filterByFormula: `OR(email = '${email}', username = '${username}')`,
-    };
-
-    const users = await data.getAirtableRecords(table, options);
-
-    users.filter((user) => {
-      if (user.get("email") == email || user.get("username") == username) {
-        console.log("user exists");
-        return (recordExists = true);
-      }
-      console.log("user does not exists");
-      return (recordExists = false);
-    });
-    return recordExists;
-  };
-
-  /* exports.authenticate=(req, res)=>{
-      const{username, password}=req.body;
-      const options= {
-        filterByFormula: `OR(email='${username}', username= '${username}')`,
-      };
-      data
-        .getAirtableRecords(table,options)
-        .then(users=>{
-          compare(userPassword, user.get('password'), function(err, response){
-            if(response){
-              //add navigator
-              console.log('they match--login')
-            }else{
-              console.log(err)
-              Alert.alert('Your username or password is incorrect');
-            }
-          });
-    })
-  .catch(err=>{
-    console.log(Error(err))
-  });
-};*/
+  function handleLogin() {
+    console.log('checking...')
+    authenticate(userEmail, userName)
+      // .then((user) => setUser(user))
+      // .catch((error) => setError());
+      .then((user) => setUser({})); // TODO wire API
+  }
 
   return (
     <View style={styles.container}>
@@ -116,10 +89,7 @@ const LoginScreen = (props) => {
       <TouchableOpacity
         style={[styles.signUpButtonStyle, { marginTop: 150 }]}
         activeOpacity={0.5}
-        onPress={
-          console.log("checking....")
-          //findUser(userEmail, userName)
-        }
+        onPress={handleLogin}
       >
         <Text style={[styles.loginText, { paddingTop: 10 }]}>LOG IN</Text>
       </TouchableOpacity>
