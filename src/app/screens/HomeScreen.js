@@ -24,6 +24,7 @@ import {
 } from "react-native";
 import SharedStyle from '../styles/shared';
 import styles from '../styles/HomeScreen';
+import { Share } from "react-native";
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 
 //took out class. Getting the hot load error on snack.
@@ -67,16 +68,19 @@ const Home = ({ navigation }) => {
     {
       key: "1",
       text: "Send",
+      icon: "send",
       operation: navigateToSendTokens
     },
     {
       key: "2",
       text: "Redeem",
+      icon: "redeem",
       operation: () => console.log("unimplemented")
     },
     {
       key: "3",
       text: "Receive",
+      icon: "drafts",
       operation: () => console.log("unimplemented")
     }
   ];
@@ -141,7 +145,7 @@ const Home = ({ navigation }) => {
                     <View style={SharedStyle.AddUser}>
                       <View style={SharedStyle.AddUserIconbg}>
                         <MaterialIcons
-                          name="add"
+                          name={item.icon}
                           color="white"
                           size={28}
                         />
@@ -268,8 +272,8 @@ const Home = ({ navigation }) => {
               />
             </View>
             <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
-              <TouchableOpacity style={styles.PanelButton}>
-                <Text style={styles.PanelButtonText}>
+              <TouchableOpacity style={SharedStyle.PanelButton}>
+                <Text style={SharedStyle.PanelButtonText}>
                   View Full History
                 </Text>
               </TouchableOpacity>

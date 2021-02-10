@@ -51,7 +51,7 @@ export default StyleSheet.create({
   AddUser: {
     height: 140,
     width: 100,
-    borderColor: "black",
+    borderColor: "grey",
     borderWidth: 1,
     justifyContent: "space-around",
     alignItems: "center",
@@ -71,4 +71,17 @@ export default StyleSheet.create({
     alignItems: "center"
   },
 
+  PanelButton: {
+    padding: 14,
+    width: 200,
+    justifyContent: "center",
+    backgroundColor: "#1c1c1c",
+    borderRadius: 10,
+  },
+
+  PanelButtonText: {
+    fontSize: 16,
+    color: "#fff",
+    alignSelf: "center",
+  },
 });

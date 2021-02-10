@@ -21,7 +21,10 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    padding: 10
+    padding: 10,
+
+    borderBottomColor: 'grey',
+    borderBottomWidth: 1
   },
 
   ProfileImage: {
@@ -47,14 +50,15 @@ export default StyleSheet.create({
 
     flex: 1,
     backgroundColor: "white",
-    borderColor: "black",
+    borderColor: "grey",
+    borderWidth: 1,
     borderRadius: 24,
   },
 
   PanelHandle: {
     height: 6,
     width: 50,
-    backgroundColor: "#666",
+    backgroundColor: "grey",
     borderRadius: 6,
     alignSelf: "center",
     marginTop: 6,
@@ -76,19 +80,5 @@ export default StyleSheet.create({
     height: 30,
     backgroundColor: "#000",
     borderRadius: 40,
-  },
-
-  PanelButton: {
-    padding: 14,
-    width: 200,
-    justifyContent: "center",
-    backgroundColor: "#1c1c1c",
-    borderRadius: 10,
-  },
-
-  PanelButtonText: {
-    fontSize: 16,
-    color: "#fff",
-    alignSelf: "center",
   },
 });

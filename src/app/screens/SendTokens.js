@@ -118,8 +118,8 @@ export default SendTokens = () => {
             placeholderTextColor="white"
           />
         </View>
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>Send</Text>
+        <TouchableOpacity style={SharedStyle.PanelButton}>
+          <Text style={SharedStyle.PanelButtonText}>Send</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

@@ -26,6 +26,8 @@ import {
   FlatList,
 } from "react-native";
 import {base} from 'airtable'
+
+import SharedStyle from '../styles/shared';
 import styles from '../styles/Login';
 
 import Airtable from '../airtable'
@@ -89,13 +91,8 @@ const LoginScreen = (props) => {
           />
         </View>
 
-        <TouchableOpacity>
-          <Button
-            title="Login"
-            color="#fcbf49"
-            onPress={handleLogin}
-            style={styles.loginBtn}
-          />
+        <TouchableOpacity style={SharedStyle.PanelButton} onPress={handleLogin}>
+          <Text style={SharedStyle.PanelButtonText}>Login</Text>
         </TouchableOpacity>
       </View>
 
