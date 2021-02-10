@@ -8,7 +8,7 @@ import {
   TextInput,
   StyleSheet,
 } from "react-native";
-import { AddUserIcon, SearchIcon } from "@expo/vector-icons";
+import { AntDesign, SearchIcon } from "@expo/vector-icons";
 
 function getUserContacts(user) {
   // API call to get the list of contact data
@@ -68,11 +68,11 @@ const ContactList = ({contacts, title, onContactAdd}) => {
       <View>
         <Text style={style.title}>{title}</Text>
         <TouchableOpacity onPRess={onContactAdd}>
-          <AddUserIcon name="Add Contact" size={26} />
+          <AndDesign name="adduser" size={26} color="black" />
         </TouchableOpacity>
       </View>
       <View>
-        <SearchIcon name="Search" size={18} />
+        <AntDesign name="search1" size={18} color="black" />
         <TextInput
           value={filterText}
           onChangeText={(nextFilterText) => setFilterText(nextFilterText)}
