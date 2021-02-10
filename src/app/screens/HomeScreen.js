@@ -22,6 +22,8 @@ import {
   Animated,
   FlatList,
 } from "react-native";
+import SharedStyle from '../styles/shared';
+import styles from '../styles/HomeScreen';
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 
 //took out class. Getting the hot load error on snack.
@@ -107,10 +109,10 @@ const Home = ({ navigation }) => {
   const ModalRef = useRef(null);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={SharedStyle.container}>
       <View>
-        <View>
-          <Text style={{ fontSize: 26, color: "black" }}> Welcome back, Gabriel</Text>
+        <View style={SharedStyle.header}>
+          <Text style={SharedStyle.titleText}>Welcome back, Gabriel</Text>
         </View>
         <View style={styles.profile}>
           <Image
@@ -128,23 +130,23 @@ const Home = ({ navigation }) => {
         </View>
 
         <View>
-          <View style={styles.CardDisplay}>
+          <View style={SharedStyle.CardDisplay}>
             <FlatList
-              contentContainerStyle={styles.CardContentList}
+              contentContainerStyle={SharedStyle.CardContentList}
               horizontal
               data={Operations}
               renderItem={({ item }) => {
                 return (
                   <TouchableOpacity onPress={item.operation}>
-                    <View style={styles.AddUser}>
-                      <View style={styles.AddUserIconbg}>
+                    <View style={SharedStyle.AddUser}>
+                      <View style={SharedStyle.AddUserIconbg}>
                         <MaterialIcons
                           name="add"
                           color="white"
                           size={28}
                         />
                       </View>
-                      <Text style={styles.CardText}>
+                      <Text style={SharedStyle.CardText}>
                         {item.text}
                       </Text>
                     </View>
@@ -154,18 +156,18 @@ const Home = ({ navigation }) => {
             />
 
             <FlatList
-              contentContainerStyle={styles.CardContentList}
+              contentContainerStyle={SharedStyle.CardContentList}
               horizontal
               data={Users}
               renderItem={({ item }) => {
                 return (
                   <TouchableOpacity>
-                    <View style={styles.AddUser}>
+                    <View style={SharedStyle.AddUser}>
                       <Image
-                        style={styles.AddUserIconbg}
+                        style={SharedStyle.AddUserIconbg}
                         source={{ uri: item.userImage }}
                       />
-                      <Text style={styles.CardText} >
+                      <Text style={SharedStyle.CardText} >
                         {item.userName}
                       </Text>
                     </View>
@@ -187,14 +189,7 @@ const Home = ({ navigation }) => {
           height={height + 20}
           friction={0.9}
         >
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: "white",
-              borderColor: "black",
-              borderRadius: 6,
-            }}
-          >
+          <View style={styles.SlideUp}>
             <View style={styles.PanelHandle}></View>
             <View>
               <Text style={{ marginVertical: 16, color: "black" }}>
@@ -272,9 +267,7 @@ const Home = ({ navigation }) => {
                 //view history
               />
             </View>
-            <View
-              style={{ flexDirection: "row", justifyContent: "flex-end" }}
-            >
+            <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
               <TouchableOpacity style={styles.PanelButton}>
                 <Text style={styles.PanelButtonText}>
                   View Full History
@@ -284,132 +277,8 @@ const Home = ({ navigation }) => {
           </View>
         </SlidingUpPanel>
     </View>
-  </View>
+  </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-
-    paddingTop: 30,
-    paddingLeft: 10,
-    paddingBottom: 10,
-    paddingRight: 10
-  },
-
-  profile: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    padding: 10
-  },
-
-  ProfileImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-  },
-
-  ProfileImageNotification: {
-    height: 12,
-    width: 12,
-    backgroundColor: "#4853ef",
-    borderRadius: 6,
-    position: "absolute",
-    right: 6,
-    borderWidth: 2,
-    borderColor: "#000",
-  },
-
-  CardDisplay: {
-    paddingTop: 25,
-    paddingLeft: 15,
-    paddingBottom: 50,
-    paddingRight: 15
-  },
-
-  CardContentList: { 
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    overflow: "scroll"
-  },
-
-  CardText: {
-    color: "black",
-    textAlign: "center" 
-  },
-
-  AddUser: {
-    height: 140,
-    width: 100,
-    borderColor: "black",
-    borderWidth: 1,
-    justifyContent: "space-around",
-    alignItems: "center",
-    backgroundColor: "white",
-    borderRadius: 10,
-    margin: 7,
-  },
-
-  AddUserIconbg: {
-    width: 70,
-    height: 70,
-    backgroundColor: "orange",
-    borderColor: "orange",
-    borderRadius: 10,
-    margin: 10,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-
-  PanelHandle: {
-    height: 6,
-    width: 50,
-    backgroundColor: "#666",
-    borderRadius: 6,
-    alignSelf: "center",
-    marginTop: 6,
-  },
-
-  PanelItemContainer: {
-    borderWidth: 0.4,
-    borderColor: "#666",
-    padding: 14,
-    borderRadius: 6,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-
-  PanelImage: {
-    width: 30,
-    height: 30,
-    backgroundColor: "#000",
-    borderRadius: 40,
-  },
-
-  PanelButton: {
-    padding: 14,
-    width: 200,
-    justifyContent: "center",
-    backgroundColor: "#1c1c1c",
-    borderRadius: 10,
-  },
-
-  PanelButtonText: {
-    fontSize: 16,
-    color: "#fff",
-    alignSelf: "center",
-  },
-});
 
 export default Home;
