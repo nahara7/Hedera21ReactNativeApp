@@ -89,7 +89,7 @@ const LoginScreen = (props) => {
       <TouchableOpacity
         style={[styles.signUpButtonStyle, { marginTop: 150 }]}
         activeOpacity={0.5}
-        onPress={handleLogin}
+        onPress={() => handleLogin()}
       >
         <Text style={[styles.loginText, { paddingTop: 10 }]}>LOG IN</Text>
       </TouchableOpacity>

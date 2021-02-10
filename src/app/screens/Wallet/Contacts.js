@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState, useRef } from "react";
+import React, { useEffect, useState, useRef, memo} from "react";
 import {
   TouchableOpacity,
   View,
@@ -10,36 +9,46 @@ import {
 } from "react-native";
 import { AntDesign, SearchIcon } from "@expo/vector-icons";
 
+import useUser from '../../../user/useUser';
+
 function getUserContacts(user) {
   // API call to get the list of contact data
-  return [];
+  return new Promise(resolve => resolve([]));
 }
 
 function getUserFavorites(user) {
   // API call to get the list of user favorite contacts
-  return [];
+  return new Promise(resolve => resolve([]));
 }
 
 function handleAddContact(contactID, isFavorite) {
   // API call
 }
 
-const AddContactModal = ({isOpen, submitContact}) => {
-  const [contactID, setContactID] = useState(false);
+const AddContactModal = ({isVisible, onDismiss, submitContact}) => {
+  const [contactID, setContactID] = useState("");
+
+  function handleSubmit() {
+    submitContact(contactID)
+    onDismiss()
+  }
 
   return (
     <Modal
       animationType="fade"
       transparent={true}
-      visible={isOpen}
+      visible={isVisible}
+      onDismiss={onDismiss}
     >
       <TextInput
         value={contactID}
         onChangeText={(text) => setContactID(text)}
         placeholder="Input contact's ID here"
       />
-      <TouchableOpacity onPress={() => submitContact(contactID)}>
-        Add Contact
+      <TouchableOpacity onPress={handleSubmit}>
+        <Text>
+          Add Contact
+        </Text>
       </TouchableOpacity>
     </Modal>
   )
@@ -65,13 +74,13 @@ const ContactList = ({contacts, title, onContactAdd}) => {
 
   return (
     <View>
-      <View>
-        <Text style={style.title}>{title}</Text>
-        <TouchableOpacity onPRess={onContactAdd}>
-          <AndDesign name="adduser" size={26} color="black" />
+      <View style={styles.row}>
+        <Text style={styles.title}>{title}</Text>
+        <TouchableOpacity onPress={onContactAdd}>
+          <AntDesign name="adduser" size={26} color="black" />
         </TouchableOpacity>
       </View>
-      <View>
+      <View style={styles.row}>
         <AntDesign name="search1" size={18} color="black" />
         <TextInput
           value={filterText}
@@ -80,7 +89,7 @@ const ContactList = ({contacts, title, onContactAdd}) => {
         />
       </View>
       <View>
-        {filteredContacts.map((contact) => (
+        {filteredContacts === null ? undefined : filteredContacts.map((contact) => (
           <ContactCard contact={contact} />
         ))}
       </View>
@@ -88,7 +97,8 @@ const ContactList = ({contacts, title, onContactAdd}) => {
   )
 };
 
-const Contacts = ({user}) => {
+const Contacts = () => {
+  const user = useUser()
   const [contacts, setContacts] = useState(null);
   // OR favorites = contacts.filter(contact => contact.isFavorite) and delete the effect
   const [favorites, setFavorites] = useState(null);
@@ -108,22 +118,24 @@ const Contacts = ({user}) => {
     })
   }, [user]);
 
-  const isAddContactModalOpen = addingContact === null;
+  const isAddContactModalOpen = addingContact !== null;
+
   return (
     <View style={styles.container}>
       <AddContactModal
-        isOpen={isAddContactModalOpen}
+        isVisible={isAddContactModalOpen}
+        onDismiss={() => setAddingContact(null)}
         submitContact={(contactID) => handleAddContact(contactID, addingContact === "favorite")}
       />
       <ContactList
         contacts={contacts}
         title="My contacts"
-        onContactAdd={setAddingContact("contact")}
+        onContactAdd={() => setAddingContact("contact")}
       />
       <ContactList
         contacts={favorites}
         title="Favorites"
-        onContactAdd={setAddingContact("favorite")}
+        onContactAdd={() => setAddingContact("favorite")}
       />
     </View>
   )
@@ -140,6 +152,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26,
     color: "black",
+  },
+  row: {
+    flexDirection: 'row',
   },
   contact: {
     width: "100%",

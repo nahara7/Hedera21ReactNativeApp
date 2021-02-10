@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native'
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
+import UserProvider from '../../user/UserProvider';
+
 import Home from './HomeScreen';
 import Login from './Login';
 import SendTokens from './SendTokens.js';
@@ -35,26 +37,28 @@ export default function Navigator() {
   const [user, setUser] = useState(null);
 
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        {user === null ? (
-          <>
-            <Drawer.Screen name="Login">
-              {(props) => <Login setUser={setUser} />}
-            </Drawer.Screen>
-          </>
-        ) : (
-          <>
-            {/* <UserProvider user={user} /> if you need to propagate user data through context */}
-            <Drawer.Screen name="Home" component={Home} />
-            <Drawer.Screen name="Contacts" component={Contacts} />
-            <Drawer.Screen name="SendTokens" component={SendTokens} />
-            <Drawer.Screen name="Settings" component={SettingsScreen} />
-            {/* Redeem */}
-            {/* Scan */}
-          </>
-        )}
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <UserProvider user={user}>
+      <NavigationContainer>
+        <Drawer.Navigator initialRouteName="Contacts">
+          {user === null ? (
+            <>
+              <Drawer.Screen name="Login">
+                {(props) => <Login setUser={setUser} />}
+              </Drawer.Screen>
+            </>
+          ) : (
+            <>
+              {/* <UserProvider user={user} /> if you need to propagate user data through context */}
+              <Drawer.Screen name="Contacts" component={Contacts} />
+              <Drawer.Screen name="Home" component={Home} />
+              <Drawer.Screen name="SendTokens" component={SendTokens} />
+              <Drawer.Screen name="Settings" component={SettingsScreen} />
+              {/* Redeem */}
+              {/* Scan */}
+            </>
+          )}
+        </Drawer.Navigator>
+     </NavigationContainer>
+    </UserProvider>
   )
 }
