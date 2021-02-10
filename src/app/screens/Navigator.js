@@ -39,7 +39,7 @@ export default function Navigator() {
   return (
     <UserProvider user={user}>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Contacts">
+        <Drawer.Navigator initialRouteName="Home">
           {user === null ? (
             <>
               <Drawer.Screen name="Login">
@@ -49,8 +49,8 @@ export default function Navigator() {
           ) : (
             <>
               {/* <UserProvider user={user} /> if you need to propagate user data through context */}
-              <Drawer.Screen name="Contacts" component={Contacts} />
               <Drawer.Screen name="Home" component={Home} />
+              <Drawer.Screen name="Contacts" component={Contacts} />
               <Drawer.Screen name="SendTokens" component={SendTokens} />
               <Drawer.Screen name="Settings" component={SettingsScreen} />
               {/* Redeem */}
