@@ -102,10 +102,10 @@ export default SendTokens = () => {
   const [token, setToken] = useState("");
   const[amount, setAmount]= useState("");
 
-  const vendorIdInputRef=createRef();
-  const tokenIdInputRef=createRef();
-  const memoInputRef=createRef();
-  const amountInputRef=createRef();
+  const vendorIdInputRef = createRef();
+  const tokenIdInputRef = createRef();
+  const memoInputRef = createRef();
+  const amountInputRef = createRef();
   
   function handleTransaction(){
     console.log('starting transaction')
