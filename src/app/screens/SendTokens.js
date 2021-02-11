@@ -7,7 +7,7 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
-import { useState, useRef } from "react";
+import { useState, useRef, createRef } from "react";
 import SwipeUpDown from "react-native-swipe-up-down";
 //import SlidingUpPanel from 'rn-sliding-up-panel';
 //import FlatList from 'react-native-web';
@@ -34,22 +34,28 @@ import { Share } from "react-native";
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 //add on change drop down menu
 
-const transaction =  (vendorTransactionId, transactionToken, transactionAmount, transactionMemo) => {
+//will add vendor Id
+const transaction =  ( transactionToken, transactionAmount, transactionMemo) => {
   //call global var
+  console.log(global.User)
+  let id=global.User.toString();
   fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/transaction/userVendor',{
     method: 'POST',
     headers: {
-     'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userId: global.USER,
-      vendorId: vendorTransactionId,
-      fee: transactionAmount,
+      userId: id,
+      vendorId:'recg5IEL4f2QNLkHK' ,
+      fee: '1',
       //memo optional
-    }),
+    })
    }) .then((response)=> response.json()
       .then((responseJson)=>{
         console.log('getting receipt')
+        var status=responseJson.status;
+        console.log(status);
         return responseJson.status;
       })
       .catch((error)=>{
@@ -91,10 +97,10 @@ const Users = [
 
 export default SendTokens = () => {
   
-  onst [vendorId, setVendorId] = useState("");
+  const [vendorId, setVendorId] = useState("");
   const [memo, setMemo] = useState("");
   const [token, setToken] = useState("");
-  const[amount, setAmount]= userSTate("");
+  const[amount, setAmount]= useState("");
 
   const vendorIdInputRef=createRef();
   const tokenIdInputRef=createRef();
@@ -103,7 +109,8 @@ export default SendTokens = () => {
   
   function handleTransaction(){
     console.log('starting transaction')
-    transaction(vendorId, token, amount, memo)
+    //will add vendor Id
+    transaction( token, amount, memo)
     //.then
   }
   
@@ -145,23 +152,32 @@ export default SendTokens = () => {
             style={styles.inputText}
             placeholder="Choose Token..."
             placeholderTextColor="white"
+            onChangeText={(Token)=> setToken(Token)}
+            onSubmitEditing={()=>amountInputRef.current && amountInputRef.current.focus()}
+            blurOnSubmit={false} 
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
             placeholder="Amount"
+            ref={amountInputRef}
             placeholderTextColor="white"
+            onChangeText={(Amount)=> setAmount(Amount)}
+            onSubmitEditing={()=>memoInputRef.current && memoInputRef.current.focus()}
           />
         </View>
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
+            ref={memoInputRef}
             placeholder="Memo(Optional)...."
             placeholderTextColor="white"
+            onChangeText={(Memo)=> setAmount(Memo)}
+            
           />
         </View>
-        <TouchableOpacity style={SharedStyle.PanelButton}>
+        <TouchableOpacity style={SharedStyle.PanelButton} onPress={handleTransaction}>
           <Text style={SharedStyle.PanelButtonText}>Send</Text>
         </TouchableOpacity>
       </View>
