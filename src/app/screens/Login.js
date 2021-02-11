@@ -1,6 +1,16 @@
 import React from "react";
-import { useState, createRef } from "react";
-import { TouchableOpacity } from "react-native";
+
+import { useState, useRef, createRef } from "react";
+import {
+  SafeAreaView,
+  Image,
+  TouchableWithoutFeedback,
+  Button,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
+  
+
 //import SwipeUpDown from 'react-native-swipe-up-down';
 //import SlidingUpPanel from 'rn-sliding-up-panel';
 // import Carousel from 'react-native-snap-carousel'
@@ -9,7 +19,19 @@ import { TouchableOpacity } from "react-native";
 //import styled from "styled-components/native";
 //import {MaterialIcons} from '@expo/vector-icons';
 //import { Entypo } from '@expo/vector-icons';
-import { View, Text, TextInput } from "react-native";
+
+import {
+  View,
+  Text,
+  Dimensions,
+  StyleSheet,
+  TextInput,
+  Animated,
+  FlatList,
+} from "react-native";
+import useUser from '../../user/useUser';
+//import AsyncStorage from '@react-native-async-storage/async-storage';
+
 //import {base} from 'airtable'
 
 import SharedStyle from '../styles/shared';
@@ -17,38 +39,48 @@ import styles from '../styles/Login';
 const Airtable = require('airtable');
 const data = require('./DataController.js');
 
+import { ServerStyleSheet } from "styled-components";
+
+
 const base = new Airtable({
   apiKey:"keykefT9YD5rhkuFg",
 }).base('appg4L9uWpNhonYHS');
 const table = base('Accounts');
-
+'
 //import Airtable from '../airtable'
 //import getAirtableRecords from './getAirtableRecords'
 
 
 const authenticate = async (email, username) => {
-  let recordExists=false;
   console.log("starting search");
+  let userId='save'
+  
   const options = {
     filterByFormula: `OR(email = '${email}', username = '${username}')`,
   };
 
   const users = await data.getAirtableRecords(table, options);
 
-  users.filter(user => {
-    if (user.get('email') === email || user.get('username') === username) {
-      var Id=user.get('userIdAccess');
-      global.USER=Id;
-      console.log(global.USER)
-      console.log("user exists")
-      return (recordExists = true);
-    }
-    return (recordExists = false);
-  });
+  const filteredUsers = users.filter((user) =>
+    user.get("email") === email || user.get("username") === username
+  );
+  const user = filteredUsers[0]
+  console.log({user})
+  if (user !== undefined) {
+    userId= user.get('userIdAccess');
+    console.log("stored used id : " + userId);
+    console.log("user exists");
+  }
 
-  return recordExists;
+  console.log("saved");
+ 
+  console.log({user, userId});
+  return {
+    id: user.get("userIdAccess"),
+    email: user.get("email"),
+    username: user.get("username"),
+  };
 };
-
 const LoginScreen = (props) => {
   const {setUser} = props
   const [userPassword, setUserPassword] = useState("");
@@ -56,14 +88,17 @@ const LoginScreen = (props) => {
   const [userEmail, setUserEmail] = useState("");
   const usernameInputRef = createRef();
   const passwordInputRef = createRef();
+  const user= useUser()
 
   function handleLogin() {
     console.log('checking...')
     authenticate(userEmail, userName)
-      // .then((user) => setUser(user))
-      // .catch((error) => setError());
-    .then((user) => setUser({})); // TODO wire API
+      .then((newUser) => {
+        console.log({newUser})
+        setUser(newUser)
+      });
   }
+
 
   return (
     <View style={styles.container}>

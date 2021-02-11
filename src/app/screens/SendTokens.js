@@ -1,21 +1,19 @@
 import React from "react";
 import { SafeAreaView, TouchableOpacity } from "react-native";
 import { useState, createRef } from "react";
-//import SlidingUpPanel from 'rn-sliding-up-panel';
-//import FlatList from 'react-native-web';
 import { MaterialIcons } from "@expo/vector-icons";
 import { View, Text, FlatList } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "../styles/SendTokens";
 import SharedStyle from "../styles/shared";
-//import {Icon, Container, Header, Content, Right} from 'native-base';
-//add on change drop down menu
 
-//will add vendor Id
-const transaction =  ( transactionToken, transactionAmount, transactionMemo) => {
-  //call global var
-  console.log(global.User)
-  let id=global.User.toString();
+import { Share } from "react-native";
+import useUser from '../../user/useUser';
+
+
+const transaction =  ( userId,  transactionToken, transactionAmount, transactionMemo) => {
+  let user='recoBCkJWolsRETIr' 
+  console.log('executing')
   fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/transaction/userVendor',{
     method: 'POST',
     headers: {
@@ -23,8 +21,9 @@ const transaction =  ( transactionToken, transactionAmount, transactionMemo) => 
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userId: id,
-      vendorId:'recg5IEL4f2QNLkHK',
+
+      userId,
+      vendorId:'recg5IEL4f2QNLkHK' ,
       fee: '1',
       //memo optional
     })
@@ -72,12 +71,15 @@ export default SendTokens = () => {
   const tokenIdInputRef = createRef();
   const memoInputRef = createRef();
   const amountInputRef = createRef();
+  const user = useUser()
+  
   
   function handleTransaction(){
     console.log('starting transaction')
     //will add vendor Id
-    transaction( token, amount, memo)
-    //.then
+    console.log({userId: user.id, token, amount, memo})
+    transaction(user.id, token, amount, memo)
+      .then(() => {})
   }
   
   
