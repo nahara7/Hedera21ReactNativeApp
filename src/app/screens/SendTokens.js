@@ -91,7 +91,7 @@ const Users = [
 
 export default SendTokens = () => {
   
-  onst [vendorId, setVendorId] = useState("");
+  const [vendorId, setVendorId] = useState("");
   const [memo, setMemo] = useState("");
   const [token, setToken] = useState("");
   const[amount, setAmount]= userSTate("");
