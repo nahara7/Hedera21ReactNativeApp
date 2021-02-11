@@ -24,7 +24,7 @@ export default StyleSheet.create({
     padding: 10,
 
     borderBottomColor: 'grey',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
 
   ProfileImage: {
@@ -36,7 +36,7 @@ export default StyleSheet.create({
   ProfileImageNotification: {
     height: 12,
     width: 12,
-    backgroundColor: "#4853ef",
+    backgroundColor: "#ff9100",
     borderRadius: 6,
     position: "absolute",
     right: 6,

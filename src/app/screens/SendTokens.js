@@ -47,7 +47,7 @@ const transaction =  ( transactionToken, transactionAmount, transactionMemo) => 
     },
     body: JSON.stringify({
       userId: id,
-      vendorId:'recg5IEL4f2QNLkHK' ,
+      vendorId:'recg5IEL4f2QNLkHK',
       fee: '1',
       //memo optional
     })
@@ -63,36 +63,25 @@ const transaction =  ( transactionToken, transactionAmount, transactionMemo) => 
       }),
    )}
 
-
-const Users = [
+const Operations = [
   {
     key: "1",
-    userImage:
-      "https://images.pexels.com/photos/4473870/pexels-photo-4473870.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    userName: "Mom",
-    transactionDate: "25 April 20",
-    amount: "JVT 70",
-    credit: true,
+    text: "Address",
+    icon: "add",
+    operation: () => console.log("unimplemented")
   },
-
   {
     key: "2",
-    userImage:
-      "https://images.pexels.com/photos/1863625/pexels-photo-1863625.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    userName: "Nola CoffeeShop",
-    transactionDate: "14 March 20",
-    amount: "JVT 12",
-    credit: true,
+    text: "Contact",
+    icon: "supervisor-account",
+    operation: () => console.log("unimplemented")
   },
   {
     key: "3",
-    userName: "Coftale CoffeeShop",
-    userImage:
-      "https://images.pexels.com/photos/1402407/pexels-photo-1402407.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    transactionDate: "05 March 20",
-    amount: "JVT 40",
-    credit: true,
-  },
+    text: "Scan",
+    icon: "qr-code-scanner",
+    operation: () => console.log("unimplemented")
+  }
 ];
 
 export default SendTokens = () => {
@@ -127,17 +116,20 @@ export default SendTokens = () => {
         <FlatList
           contentContainerStyle={SharedStyle.CardContentList}
           horizontal
-          data={Users}
+          data={Operations}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity>
+              <TouchableOpacity onPress={item.operation}>
                 <View style={SharedStyle.AddUser}>
-                  <Image
-                    style={SharedStyle.AddUserIconbg}
-                    source={{ uri: item.userImage }}
-                  />
-                  <Text style={SharedStyle.CardText} >
-                    {item.userName}
+                  <View style={SharedStyle.AddUserIconbg}>
+                    <MaterialIcons
+                      name={item.icon}
+                      color="white"
+                      size={28}
+                    />
+                  </View>
+                  <Text style={SharedStyle.CardText}>
+                    {item.text}
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -150,7 +142,7 @@ export default SendTokens = () => {
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
-            placeholder="Choose Token..."
+            placeholder="Choose Token"
             placeholderTextColor="white"
             onChangeText={(Token)=> setToken(Token)}
             onSubmitEditing={()=>amountInputRef.current && amountInputRef.current.focus()}
@@ -171,7 +163,7 @@ export default SendTokens = () => {
           <TextInput
             style={styles.inputText}
             ref={memoInputRef}
-            placeholder="Memo(Optional)...."
+            placeholder="Memo (Optional)"
             placeholderTextColor="white"
             onChangeText={(Memo)=> setAmount(Memo)}
             

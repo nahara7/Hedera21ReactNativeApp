@@ -89,7 +89,7 @@ const LoginScreen = (props) => {
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
-            placeholder=" Username..."
+            placeholder="Username"
             placeholderTextColor="white"
             onChangeText={(UserName) => setUserName(UserName)}
             onSubmitEditing={() =>
@@ -103,7 +103,7 @@ const LoginScreen = (props) => {
           <TextInput
             secureTextEntry
             style={styles.inputText}
-            placeholder=" Password..."
+            placeholder="Password"
             placeholderTextColor="white"
             onChangeText={(UserPassword) => setUserPassword(UserPassword)}
             ref={passwordInputRef}
