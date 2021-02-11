@@ -58,7 +58,7 @@ const authenticate = async (email, username) => {
   const users = await data.getAirtableRecords(table, options);
 
   const filteredUsers = users.filter((user) =>
-    user.email === email || user.username === username
+    user.get("email") === email || user.get("username") === username
   );
   const user = filteredUsers[0]
   console.log({user})
