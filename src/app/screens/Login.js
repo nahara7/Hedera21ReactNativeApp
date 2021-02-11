@@ -48,9 +48,8 @@ const table = base('Accounts');
 
 
 const authenticate = async (email, username) => {
-  let recordExists=false;
   console.log("starting search");
-   let userId='save'
+  let userId='save'
   
   const options = {
     filterByFormula: `OR(email = '${email}', username = '${username}')`,
@@ -58,24 +57,20 @@ const authenticate = async (email, username) => {
 
   const users = await data.getAirtableRecords(table, options);
 
-  users.filter(user => {
-    if (user.get('email') === email || user.get('username') === username) {
-      
-       userId= user.get('userIdAccess');
-      console.log("stored used id : " + userId);
-
-      console.log("user exists")
-     
-      
-    }
-    
-   
-  });
+  const user = users.find(user =>
+    user.email === email || user.username === username
+  );
+  if (user !== undefined) {
+    userId= user.get('userIdAccess');
+    console.log("stored used id : " + userId);
+    console.log("user exists");
+  }
  // await AsyncStorage.setItem(USER_ID,userId);
   console.log("saved");
   //var Id= await AsyncStorage.getItem(USER_ID);
-  //console.log(Id); 
-  return recordExists; 
+  //console.log(Id);
+  console.log({users, user, userId})
+  return user;
 };
   
   
@@ -101,11 +96,12 @@ const LoginScreen = (props) => {
   function handleLogin() {
     console.log('checking...')
     authenticate(userEmail, userName)
-         .then((newUser) => setUser({})); 
-         
-      }
-    // TODO wire API
-  
+      .then((newUser) => {
+        console.log({newUser})
+        setUser(newUser)
+      });
+  }
+  // TODO wire API
 
   return (
     <View style={styles.container}>
