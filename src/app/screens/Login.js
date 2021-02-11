@@ -57,9 +57,10 @@ const authenticate = async (email, username) => {
 
   const users = await data.getAirtableRecords(table, options);
 
-  const user = users.filter((user) =>
+  const filteredUsers = users.filter((user) =>
     user.email === email || user.username === username
   );
+  const user = filteredUsers[0]
   console.log({user})
   if (user !== undefined) {
     userId= user.get('userIdAccess');
