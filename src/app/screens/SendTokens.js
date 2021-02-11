@@ -1,36 +1,13 @@
 import React from "react";
-import {
-  SafeAreaView,
-  Image,
-  TouchableWithoutFeedback,
-  Button,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
-import { useState, useRef, createRef } from "react";
-import SwipeUpDown from "react-native-swipe-up-down";
+import { SafeAreaView, TouchableOpacity } from "react-native";
+import { useState, createRef } from "react";
 //import SlidingUpPanel from 'rn-sliding-up-panel';
 //import FlatList from 'react-native-web';
-import { StatusBar } from "expo-status-bar";
-import styled from "styled-components/native";
-import { Header } from "react-native-elements";
-import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import {
-  View,
-  Text,
-  Dimensions,
-  StyleSheet,
-  Animated,
-  FlatList,
-} from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { View, Text, FlatList } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Container } from "native-base";
 import styles from "../styles/SendTokens";
 import SharedStyle from "../styles/shared";
-import { Share } from "react-native";
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 //add on change drop down menu
 
@@ -107,7 +84,7 @@ export default SendTokens = () => {
   return (
     <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
       <View style={SharedStyle.header}>
-        <Text style={SharedStyle.titleText}>
+        <Text style={SharedStyle.TitleText}>
           Send Tokens
         </Text>
       </View>
@@ -139,9 +116,9 @@ export default SendTokens = () => {
       </View>
 
       <View style={styles.form}>
-        <View style={styles.inputView}>
+        <View style={SharedStyle.InputView}>
           <TextInput
-            style={styles.inputText}
+            style={SharedStyle.InputText}
             placeholder="Choose Token"
             placeholderTextColor="white"
             onChangeText={(Token)=> setToken(Token)}
@@ -149,9 +126,9 @@ export default SendTokens = () => {
             blurOnSubmit={false} 
           />
         </View>
-        <View style={styles.inputView}>
+        <View style={SharedStyle.InputView}>
           <TextInput
-            style={styles.inputText}
+            style={SharedStyle.InputText}
             placeholder="Amount"
             ref={amountInputRef}
             placeholderTextColor="white"
@@ -159,9 +136,9 @@ export default SendTokens = () => {
             onSubmitEditing={()=>memoInputRef.current && memoInputRef.current.focus()}
           />
         </View>
-        <View style={styles.inputView}>
+        <View style={SharedStyle.InputView}>
           <TextInput
-            style={styles.inputText}
+            style={SharedStyle.InputText}
             ref={memoInputRef}
             placeholder="Memo (Optional)"
             placeholderTextColor="white"

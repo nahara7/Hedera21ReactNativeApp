@@ -116,7 +116,7 @@ const Home = ({ navigation }) => {
     <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
       <View>
         <View style={SharedStyle.header}>
-          <Text style={SharedStyle.titleText}>Welcome back, Gabriel</Text>
+          <Text style={SharedStyle.TitleText}>Welcome back, Gabriel</Text>
         </View>
         <TouchableOpacity>
           <View style={styles.profile}>

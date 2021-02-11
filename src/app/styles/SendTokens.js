@@ -1,17 +1,8 @@
 
 import { StyleSheet } from 'react-native';
+import Colors from './colors';
 
 export default StyleSheet.create({
-  inputView: {
-    width: 300,
-    backgroundColor: "#fcbf49",
-    borderRadius: 25,
-    height: 50,
-    marginBottom: 20,
-    justifyContent: "center",
-    padding: 20,
-  },
-
   form: {
     display: "flex",
     flexDirection: "column",
@@ -19,19 +10,14 @@ export default StyleSheet.create({
     paddingBottom: 20
   },
 
-  inputText: {
-    height: 50,
-    color: "white",
-  },
-
   forgot: {
-    color: "black",
+    color: Colors.black,
     fontSize: 11,
   },
 
   loginBtn: {
     width: 300,
-    backgroundColor: "black",
+    backgroundColor: Colors.black,
     borderRadius: 25,
     height: 50,
     alignItems: "center",
@@ -42,7 +28,7 @@ export default StyleSheet.create({
   },
 
   loginText: {
-    color: "white",
+    color: Colors.white,
   },
 
   AddUser: {
@@ -50,7 +36,6 @@ export default StyleSheet.create({
     width: 100,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#0c0c0c",
     borderRadius: 10,
     //paddingTop: 70,
     //marginRight: 14,
@@ -60,7 +45,7 @@ export default StyleSheet.create({
   AddUserIconbg: {
     width: 70,
     height: 70,
-    backgroundColor: "#000",
+    backgroundColor: Colors.white,
     borderRadius: 10,
     marginBottom: 10,
     justifyContent: "center",

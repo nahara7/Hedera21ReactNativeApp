@@ -1,13 +1,6 @@
 import React from "react";
-import { useState, useRef, createRef } from "react";
-import {
-  SafeAreaView,
-  Image,
-  TouchableWithoutFeedback,
-  Button,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
+import { useState, createRef } from "react";
+import { TouchableOpacity } from "react-native";
 //import SwipeUpDown from 'react-native-swipe-up-down';
 //import SlidingUpPanel from 'rn-sliding-up-panel';
 // import Carousel from 'react-native-snap-carousel'
@@ -16,22 +9,13 @@ import {
 //import styled from "styled-components/native";
 //import {MaterialIcons} from '@expo/vector-icons';
 //import { Entypo } from '@expo/vector-icons';
-import {
-  View,
-  Text,
-  Dimensions,
-  StyleSheet,
-  TextInput,
-  Animated,
-  FlatList,
-} from "react-native";
+import { View, Text, TextInput } from "react-native";
 //import {base} from 'airtable'
 
 import SharedStyle from '../styles/shared';
 import styles from '../styles/Login';
 const Airtable = require('airtable');
 const data = require('./DataController.js');
-import { ServerStyleSheet } from "styled-components";
 
 const base = new Airtable({
   apiKey:"keykefT9YD5rhkuFg",
@@ -86,9 +70,9 @@ const LoginScreen = (props) => {
       <Text style={styles.logo}>TOKA</Text>
 
       <View style={styles.loginContainer}>
-        <View style={styles.inputView}>
+        <View style={SharedStyle.InputView}>
           <TextInput
-            style={styles.inputText}
+            style={SharedStyle.InputText}
             placeholder="Username"
             placeholderTextColor="white"
             onChangeText={(UserName) => setUserName(UserName)}
@@ -99,10 +83,10 @@ const LoginScreen = (props) => {
           />
         </View>
 
-        <View style={styles.inputView}>
+        <View style={SharedStyle.InputView}>
           <TextInput
             secureTextEntry
-            style={styles.inputText}
+            style={SharedStyle.InputText}
             placeholder="Password"
             placeholderTextColor="white"
             onChangeText={(UserPassword) => setUserPassword(UserPassword)}
