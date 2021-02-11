@@ -32,14 +32,14 @@ import styles from "../styles/SendTokens";
 import SharedStyle from "../styles/shared";
 import { Share } from "react-native";
 import useUser from '../../user/useUser';
+//import AsyncStorage from "@react-native-async-storage/async-storage";
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 //add on change drop down menu
 
 //will add vendor Id
+
 const transaction =  ( transactionToken, transactionAmount, transactionMemo) => {
-  const user= useUser()
-  console.log(user);
-  console.log(user.email + " userId");
+  let user='recoBCkJWolsRETIr' 
   console.log('executing')
   fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/transaction/userVendor',{
     method: 'POST',
@@ -48,7 +48,7 @@ const transaction =  ( transactionToken, transactionAmount, transactionMemo) => 
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userId: user.userIdAccess,
+      userId: user,
       vendorId:'recg5IEL4f2QNLkHK' ,
       fee: '1',
       //memo optional
@@ -108,8 +108,13 @@ export default SendTokens = () => {
   const tokenIdInputRef = createRef();
   const memoInputRef = createRef();
   const amountInputRef = createRef();
-  const user = useUser()
-
+  //const user = useUser()
+  //var user=  AsyncStorage.getItem(USER_ID);
+  //console.log(user);
+ 
+  
+  //console.log(user);
+  
   function handleTransaction(){
     console.log('starting transaction')
     //will add vendor Id
@@ -181,7 +186,7 @@ export default SendTokens = () => {
             
           />
         </View>
-        <TouchableOpacity style={SharedStyle.PanelButton} onPress={handleTransaction()}>
+        <TouchableOpacity style={SharedStyle.PanelButton} onPress={handleTransaction}>
           <Text style={SharedStyle.PanelButtonText}>Send</Text>
         </TouchableOpacity>
       </View>
