@@ -7,7 +7,7 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
-import { useState, useRef } from "react";
+import { useState, useRef, createRef } from "react";
 import SwipeUpDown from "react-native-swipe-up-down";
 //import SlidingUpPanel from 'rn-sliding-up-panel';
 //import FlatList from 'react-native-web';
@@ -94,12 +94,12 @@ export default SendTokens = () => {
   const [vendorId, setVendorId] = useState("");
   const [memo, setMemo] = useState("");
   const [token, setToken] = useState("");
-  const[amount, setAmount]= userSTate("");
+  const[amount, setAmount]= useState("");
 
-  const vendorIdInputRef=createRef();
-  const tokenIdInputRef=createRef();
-  const memoInputRef=createRef();
-  const amountInputRef=createRef();
+  const vendorIdInputRef = createRef();
+  const tokenIdInputRef = createRef();
+  const memoInputRef = createRef();
+  const amountInputRef = createRef();
   
   function handleTransaction(){
     console.log('starting transaction')

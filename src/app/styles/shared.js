@@ -10,7 +10,7 @@ export default StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
 
-    paddingTop: 25,
+    paddingTop: 30,
     paddingLeft: 10,
     paddingBottom: 10,
     paddingRight: 10
