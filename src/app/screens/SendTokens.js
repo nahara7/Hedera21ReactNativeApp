@@ -118,8 +118,8 @@ export default SendTokens = () => {
   function handleTransaction(){
     console.log('starting transaction')
     //will add vendor Id
-    console.log({user, token, amount, memo})
-    transaction(user, token, amount, memo)
+    console.log({userId: user.id, token, amount, memo})
+    transaction(user.id, token, amount, memo)
       .then(() => {})
   }
   

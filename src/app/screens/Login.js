@@ -72,7 +72,11 @@ const authenticate = async (email, username) => {
   //var Id= await AsyncStorage.getItem(USER_ID);
   //console.log(Id);
   console.log({user, userId});
-  return user;
+  return {
+    id: user.get("userIdAccess"),
+    email: user.get("email"),
+    username: user.get("username"),
+  };
 };
 
   
