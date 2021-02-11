@@ -25,6 +25,7 @@ import {
   Animated,
   FlatList,
 } from "react-native";
+import useUser from '../../user/useUser';
 //import {base} from 'airtable'
 
 import SharedStyle from '../styles/shared';
@@ -43,7 +44,6 @@ const table = base('Accounts');
 
 
 const authenticate = async (email, username) => {
-  let recordExists=false;
   console.log("starting search");
   const options = {
     filterByFormula: `OR(email = '${email}', username = '${username}')`,
@@ -51,19 +51,12 @@ const authenticate = async (email, username) => {
 
   const users = await data.getAirtableRecords(table, options);
 
-  users.filter(user => {
-    if (user.get('email') === email || user.get('username') === username) {
-      var Id=user.get('userIdAccess');
-      
-      console.log("user exists")
-      return user;
-    }
-    return (recordExists = false);
-  });
 
-  return recordExists;
+    const user=users.find(user=>user.email===email || user.username===username)
+    console.log(user.username);
+    console.log('user exists');   
+    return user
 };
-
 const LoginScreen = (props) => {
   const {setUser} = props
   const [userPassword, setUserPassword] = useState("");
@@ -71,14 +64,17 @@ const LoginScreen = (props) => {
   const [userEmail, setUserEmail] = useState("");
   const usernameInputRef = createRef();
   const passwordInputRef = createRef();
+  const user= useUser()
 
   function handleLogin() {
     console.log('checking...')
     authenticate(userEmail, userName)
-         .then((newUser) => setUser({})); 
-      
+    
+         .then((newUser) => setUser(newUser)); 
+         
+      }
     // TODO wire API
-  }
+  
 
   return (
     <View style={styles.container}>

@@ -39,6 +39,7 @@ import useUser from '../../user/useUser';
 const transaction =  ( transactionToken, transactionAmount, transactionMemo) => {
   const user= useUser()
   console.log(user);
+  console.log(user.email + " userId");
   console.log('executing')
   fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/transaction/userVendor',{
     method: 'POST',
@@ -47,7 +48,7 @@ const transaction =  ( transactionToken, transactionAmount, transactionMemo) => 
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userId: user.get('userIdAccess'),
+      userId: user.userIdAccess,
       vendorId:'recg5IEL4f2QNLkHK' ,
       fee: '1',
       //memo optional
