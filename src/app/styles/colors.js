@@ -1,6 +1,6 @@
 
 export default Colors = {
-  orange: "#ff9100",
+  orange: "#ff9e00",
   lightOrange: "#fcbf49",
   white: "white",
   gray: "grey",

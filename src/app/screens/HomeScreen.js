@@ -27,8 +27,6 @@ import styles from '../styles/HomeScreen';
 import { Share } from "react-native";
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 
-//took out class. Getting the hot load error on snack.
-//expo was crashing try to find the bug. Configure android studio.
 
 
 const Home = ({ navigation }) => {
@@ -115,7 +113,7 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
       <View>
-        <View style={SharedStyle.header}>
+        <View style={[SharedStyle.header,  {paddingTop: 45}]}>
           <Text style={SharedStyle.TitleText}>Welcome back, Gabriel</Text>
         </View>
         <TouchableOpacity>
@@ -140,6 +138,7 @@ const Home = ({ navigation }) => {
             <FlatList
               contentContainerStyle={SharedStyle.CardContentList}
               horizontal
+              disableScrollViewPanResponder
               data={Operations}
               renderItem={({ item }) => {
                 return (
@@ -162,6 +161,7 @@ const Home = ({ navigation }) => {
             />
 
             <FlatList
+             style={{paddingBottom: 10}}
               contentContainerStyle={SharedStyle.CardContentList}
               horizontal
               data={Users}
@@ -187,6 +187,7 @@ const Home = ({ navigation }) => {
 
       <View>
         <SlidingUpPanel
+          
           ref={ModalRef}
           draggableRange={dragRange}
           animatedValue={_draggedValue}

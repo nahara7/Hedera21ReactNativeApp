@@ -24,7 +24,8 @@ export default StyleSheet.create({
     alignItems: "center",
     padding: 10,
 
-    borderBottomColor: Colors.gray,
+    borderBottomColor: "#fcbf49",
+    //borderBottomColor: Colors.gray,
     borderBottomWidth: 1,
   },
 
@@ -42,7 +43,7 @@ export default StyleSheet.create({
     position: "absolute",
     right: 6,
     borderWidth: 2,
-    borderColor: Colors.black,
+    borderColor: 'white',
   },
 
   SlideUp: {

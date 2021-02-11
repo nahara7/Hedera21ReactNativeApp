@@ -19,7 +19,8 @@ export default StyleSheet.create({
   header: {
     width: "100%",
     justifyContent: "center",
-    borderBottomColor: Colors.gray,
+    borderBottomColor: "#fcbf49",
+    //borderBottomColor: Colors.gray,
     borderBottomWidth: 1
   },
 
@@ -33,14 +34,16 @@ export default StyleSheet.create({
     paddingTop: 25,
     paddingLeft: 15,
     paddingBottom: 50,
-    paddingRight: 15
+    paddingRight: 15,
+   
   },
 
   CardContentList: { 
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    overflow: "scroll"
+    overflow: "scroll",
+   
   },
 
   CardText: {
@@ -51,7 +54,8 @@ export default StyleSheet.create({
   AddUser: {
     height: 140,
     width: 100,
-    borderColor: Colors.grey,
+    borderColor: "#fcbf49",
+    //borderColor: Colors.grey,
     borderWidth: 1,
     justifyContent: "space-around",
     alignItems: "center",

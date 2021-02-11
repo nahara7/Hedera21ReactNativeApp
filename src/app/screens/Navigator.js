@@ -9,6 +9,7 @@ import Login from './Login';
 import SendTokens from './SendTokens.js';
 import SettingsScreen from'./SettingsScreen.js';
 import Contacts from './Wallet/Contacts'
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 //fix navigator and do not import navigator in other classes
 //must determine how to implement into homescreen so that you can 
@@ -39,7 +40,19 @@ export default function Navigator() {
   return (
     <UserProvider user={user}>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Navigator initialRouteName="Home"
+        drawerStyle={{
+          backgroundColor: '#ff8500',
+          fontColor: "black",
+          fontStyle: "bold"
+        }}
+        drawerContentOptions={{
+          activeTintColor: "#ff6d00",
+          //activeTintColor: 
+          //activeBackgroundColor: Colors.orange,
+
+        }}
+        >
           {user === null ? (
             <>
               <Drawer.Screen name="Login">
@@ -57,6 +70,7 @@ export default function Navigator() {
               {/* Scan */}
             </>
           )}
+          
         </Drawer.Navigator>
      </NavigationContainer>
     </UserProvider>
