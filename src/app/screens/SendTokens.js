@@ -38,7 +38,7 @@ import useUser from '../../user/useUser';
 
 //will add vendor Id
 
-const transaction =  ( transactionToken, transactionAmount, transactionMemo) => {
+const transaction =  ( userId,  transactionToken, transactionAmount, transactionMemo) => {
   let user='recoBCkJWolsRETIr' 
   console.log('executing')
   fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/transaction/userVendor',{
@@ -48,7 +48,7 @@ const transaction =  ( transactionToken, transactionAmount, transactionMemo) => 
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userId: user,
+      userId,
       vendorId:'recg5IEL4f2QNLkHK' ,
       fee: '1',
       //memo optional
@@ -108,7 +108,7 @@ export default SendTokens = () => {
   const tokenIdInputRef = createRef();
   const memoInputRef = createRef();
   const amountInputRef = createRef();
-  //const user = useUser()
+  const user = useUser()
   //var user=  AsyncStorage.getItem(USER_ID);
   //console.log(user);
  
@@ -118,9 +118,9 @@ export default SendTokens = () => {
   function handleTransaction(){
     console.log('starting transaction')
     //will add vendor Id
-   
-    transaction( token, amount, memo)
-    //.then
+    console.log({user, token, amount, memo})
+    transaction(user, token, amount, memo)
+      .then(() => {})
   }
   
   

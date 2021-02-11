@@ -57,32 +57,31 @@ const authenticate = async (email, username) => {
 
   const users = await data.getAirtableRecords(table, options);
 
-  const user = users.find(user =>
+  const user = users.filter((user) =>
     user.email === email || user.username === username
   );
+  console.log({user})
   if (user !== undefined) {
     userId= user.get('userIdAccess');
     console.log("stored used id : " + userId);
     console.log("user exists");
   }
- // await AsyncStorage.setItem(USER_ID,userId);
+  // await AsyncStorage.setItem(USER_ID,userId);
   console.log("saved");
   //var Id= await AsyncStorage.getItem(USER_ID);
   //console.log(Id);
-  console.log({users, user, userId})
+  console.log({user, userId});
   return user;
 };
-  
-  
-  /*const users = await data.getAirtableRecords(table, options);
 
-
-    const user=users.find(user=>user.email===email || user.username===username)
-    //console.log(user.userIdAccess);
-    var test=user.username;
-    console.log(test);
-    console.log('user exists');   
-    return user
+  
+/*const users = await data.getAirtableRecords(table, options);
+  const user=users.find(user=>user.email===email || user.username===username)
+  //console.log(user.userIdAccess);
+  var test=user.username;
+  console.log(test);
+  console.log('user exists');   
+  return user
 };*/
 const LoginScreen = (props) => {
   const {setUser} = props
