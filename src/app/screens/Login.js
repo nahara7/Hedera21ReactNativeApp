@@ -1,6 +1,15 @@
 import React from "react";
-import { useState, createRef } from "react";
-import { TouchableOpacity } from "react-native";
+import { useState, useRef, createRef } from "react";
+import {
+  SafeAreaView,
+  Image,
+  TouchableWithoutFeedback,
+  Button,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
+  //import {Id} from './Global.js';
+
 //import SwipeUpDown from 'react-native-swipe-up-down';
 //import SlidingUpPanel from 'rn-sliding-up-panel';
 // import Carousel from 'react-native-snap-carousel'
@@ -9,26 +18,65 @@ import { TouchableOpacity } from "react-native";
 //import styled from "styled-components/native";
 //import {MaterialIcons} from '@expo/vector-icons';
 //import { Entypo } from '@expo/vector-icons';
-import { View, Text, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  Dimensions,
+  StyleSheet,
+  TextInput,
+  Animated,
+  FlatList,
+} from "react-native";
+import useUser from '../../user/useUser';
+//import AsyncStorage from '@react-native-async-storage/async-storage';
 //import {base} from 'airtable'
 
 import SharedStyle from '../styles/shared';
 import styles from '../styles/Login';
-const Airtable = require('airtable');
+import Airtable from 'airtable'
 const data = require('./DataController.js');
+import { ServerStyleSheet } from "styled-components";
+//export const userId=
 
 const base = new Airtable({
   apiKey:"keykefT9YD5rhkuFg",
 }).base('appg4L9uWpNhonYHS');
 const table = base('Accounts');
-
+//const USER_ID='@save_userid'
 //import Airtable from '../airtable'
 //import getAirtableRecords from './getAirtableRecords'
 
-
+const  getuserAccountId=(userId)=>{
+  let user='recoBCkJWolsRETIr' 
+  console.log('executing');
+  fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/account/userAccountId/',{
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      baseId:user,
+      
+    })
+   }) .then((response)=> response.json()
+      .then((responseJson)=>{
+        console.log('getting user account id')
+        var accountId=responseJson;
+        
+        //update user object
+        console.log(accountId);
+        
+      })
+      .catch((error)=>{
+        console.error(error)
+      }),
+   )}
 const authenticate = async (email, username) => {
   let recordExists=false;
   console.log("starting search");
+   let userId='save'
+  
   const options = {
     filterByFormula: `OR(email = '${email}', username = '${username}')`,
   };
@@ -37,18 +85,35 @@ const authenticate = async (email, username) => {
 
   users.filter(user => {
     if (user.get('email') === email || user.get('username') === username) {
-      var Id=user.get('userIdAccess');
-      global.USER=Id;
-      console.log(global.USER)
+      
+      
+      console.log("stored used id : " + user.get('userIdAccess'));
+      getuserAccountId(user.get('userIdAccess'))
       console.log("user exists")
-      return (recordExists = true);
+     
+      
     }
-    return (recordExists = false);
+    
+   
   });
-
-  return recordExists;
+ // await AsyncStorage.setItem(USER_ID,userId);
+  console.log("saved");
+  //var Id= await AsyncStorage.getItem(USER_ID);
+  //console.log(Id); 
+  return recordExists; 
 };
+  
+  
+  /*const users = await data.getAirtableRecords(table, options);
 
+
+    const user=users.find(user=>user.email===email || user.username===username)
+    //console.log(user.userIdAccess);
+    var test=user.username;
+    console.log(test);
+    console.log('user exists');   
+    return user
+};*/
 const LoginScreen = (props) => {
   const {setUser} = props
   const [userPassword, setUserPassword] = useState("");
@@ -56,24 +121,26 @@ const LoginScreen = (props) => {
   const [userEmail, setUserEmail] = useState("");
   const usernameInputRef = createRef();
   const passwordInputRef = createRef();
+  const user= useUser()
 
   function handleLogin() {
     console.log('checking...')
     authenticate(userEmail, userName)
-      // .then((user) => setUser(user))
-      // .catch((error) => setError());
-    .then((user) => setUser({})); // TODO wire API
-  }
+         .then((newUser) => setUser({})); 
+         
+      }
+    // TODO wire API
+  
 
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>TOKA</Text>
 
       <View style={styles.loginContainer}>
-        <View style={SharedStyle.InputView}>
+        <View style={styles.inputView}>
           <TextInput
-            style={SharedStyle.InputText}
-            placeholder="Username"
+            style={styles.inputText}
+            placeholder=" Username..."
             placeholderTextColor="white"
             onChangeText={(UserName) => setUserName(UserName)}
             onSubmitEditing={() =>
@@ -83,11 +150,11 @@ const LoginScreen = (props) => {
           />
         </View>
 
-        <View style={SharedStyle.InputView}>
+        <View style={styles.inputView}>
           <TextInput
             secureTextEntry
-            style={SharedStyle.InputText}
-            placeholder="Password"
+            style={styles.inputText}
+            placeholder=" Password..."
             placeholderTextColor="white"
             onChangeText={(UserPassword) => setUserPassword(UserPassword)}
             ref={passwordInputRef}

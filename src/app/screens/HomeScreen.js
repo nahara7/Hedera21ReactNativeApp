@@ -28,6 +28,54 @@ import { Share } from "react-native";
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 
 
+const getuserBalance =  () => {
+  let user='recoBCkJWolsRETIr' 
+  console.log('executing')
+  fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/account/userBalance/',{
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      baseId:user,
+      
+    })
+   }) .then((response)=> response.json()
+      .then((responseJson)=>{
+        console.log('getting  token relationships')
+        var tokens=responseJson.status;
+        console.log(tokens);
+        return responseJson;
+      })
+      .catch((error)=>{
+        console.error(error)
+      }),
+   )}
+   const getuserTokenAssociation =  () => {
+    let user='recoBCkJWolsRETIr' 
+    console.log('executing')
+    fetch ('https://still-coast-11655.herokuapp.com/api/v1.0//userTokenAssociate/',{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        baseId:user,
+        
+      })
+     }) .then((response)=> response.json()
+        .then((responseJson)=>{
+          console.log('getting  token relationships')
+          var tokens=responseJson.status;
+          console.log(tokens);
+          return responseJson;
+        })
+        .catch((error)=>{
+          console.error(error)
+        }),
+     )}
 
 const Home = ({ navigation }) => {
   //demo users
