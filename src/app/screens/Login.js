@@ -1,4 +1,8 @@
 import React from "react";
+<<<<<<< HEAD
+=======
+
+>>>>>>> d6a190208769895504582224fd976e47793a9693
 import { useState, useRef, createRef } from "react";
 import {
   SafeAreaView,
@@ -8,7 +12,11 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
+<<<<<<< HEAD
   //import {Id} from './Global.js';
+=======
+  
+>>>>>>> d6a190208769895504582224fd976e47793a9693
 
 //import SwipeUpDown from 'react-native-swipe-up-down';
 //import SlidingUpPanel from 'rn-sliding-up-panel';
@@ -18,6 +26,10 @@ import {
 //import styled from "styled-components/native";
 //import {MaterialIcons} from '@expo/vector-icons';
 //import { Entypo } from '@expo/vector-icons';
+<<<<<<< HEAD
+=======
+
+>>>>>>> d6a190208769895504582224fd976e47793a9693
 import {
   View,
   Text,
@@ -29,6 +41,10 @@ import {
 } from "react-native";
 import useUser from '../../user/useUser';
 //import AsyncStorage from '@react-native-async-storage/async-storage';
+<<<<<<< HEAD
+=======
+
+>>>>>>> d6a190208769895504582224fd976e47793a9693
 //import {base} from 'airtable'
 
 import SharedStyle from '../styles/shared';
@@ -38,11 +54,18 @@ const data = require('./DataController.js');
 import { ServerStyleSheet } from "styled-components";
 //export const userId=
 
+import { ServerStyleSheet } from "styled-components";
+
+
 const base = new Airtable({
   apiKey:"keykefT9YD5rhkuFg",
 }).base('appg4L9uWpNhonYHS');
 const table = base('Accounts');
+<<<<<<< HEAD
 //const USER_ID='@save_userid'
+=======
+'
+>>>>>>> d6a190208769895504582224fd976e47793a9693
 //import Airtable from '../airtable'
 //import getAirtableRecords from './getAirtableRecords'
 
@@ -73,9 +96,12 @@ const  getuserAccountId=(userId)=>{
       }),
    )}
 const authenticate = async (email, username) => {
-  let recordExists=false;
   console.log("starting search");
+<<<<<<< HEAD
    let userId='save'
+=======
+  let userId='save'
+>>>>>>> d6a190208769895504582224fd976e47793a9693
   
   const options = {
     filterByFormula: `OR(email = '${email}', username = '${username}')`,
@@ -83,6 +109,7 @@ const authenticate = async (email, username) => {
 
   const users = await data.getAirtableRecords(table, options);
 
+<<<<<<< HEAD
   users.filter(user => {
     if (user.get('email') === email || user.get('username') === username) {
       
@@ -114,6 +141,28 @@ const authenticate = async (email, username) => {
     console.log('user exists');   
     return user
 };*/
+=======
+  const filteredUsers = users.filter((user) =>
+    user.get("email") === email || user.get("username") === username
+  );
+  const user = filteredUsers[0]
+  console.log({user})
+  if (user !== undefined) {
+    userId= user.get('userIdAccess');
+    console.log("stored used id : " + userId);
+    console.log("user exists");
+  }
+
+  console.log("saved");
+ 
+  console.log({user, userId});
+  return {
+    id: user.get("userIdAccess"),
+    email: user.get("email"),
+    username: user.get("username"),
+  };
+};
+>>>>>>> d6a190208769895504582224fd976e47793a9693
 const LoginScreen = (props) => {
   const {setUser} = props
   const [userPassword, setUserPassword] = useState("");
@@ -126,11 +175,20 @@ const LoginScreen = (props) => {
   function handleLogin() {
     console.log('checking...')
     authenticate(userEmail, userName)
+<<<<<<< HEAD
          .then((newUser) => setUser({})); 
          
       }
     // TODO wire API
   
+=======
+      .then((newUser) => {
+        console.log({newUser})
+        setUser(newUser)
+      });
+  }
+>>>>>>> d6a190208769895504582224fd976e47793a9693
+
 
   return (
     <View style={styles.container}>
