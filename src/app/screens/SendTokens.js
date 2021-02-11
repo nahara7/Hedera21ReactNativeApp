@@ -31,14 +31,15 @@ import { Container } from "native-base";
 import styles from "../styles/SendTokens";
 import SharedStyle from "../styles/shared";
 import { Share } from "react-native";
+import useUser from '../../user/useUser';
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 //add on change drop down menu
 
 //will add vendor Id
 const transaction =  ( transactionToken, transactionAmount, transactionMemo) => {
-  //call global var
-  console.log(global.User)
-  let id=global.User.toString();
+  const user= useUser()
+  console.log(user);
+  console.log('executing')
   fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/transaction/userVendor',{
     method: 'POST',
     headers: {
@@ -46,7 +47,7 @@ const transaction =  ( transactionToken, transactionAmount, transactionMemo) => 
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userId: id,
+      userId: user.get('userIdAccess'),
       vendorId:'recg5IEL4f2QNLkHK' ,
       fee: '1',
       //memo optional
@@ -106,10 +107,12 @@ export default SendTokens = () => {
   const tokenIdInputRef = createRef();
   const memoInputRef = createRef();
   const amountInputRef = createRef();
-  
+  const user = useUser()
+
   function handleTransaction(){
     console.log('starting transaction')
     //will add vendor Id
+   
     transaction( token, amount, memo)
     //.then
   }
@@ -177,7 +180,7 @@ export default SendTokens = () => {
             
           />
         </View>
-        <TouchableOpacity style={SharedStyle.PanelButton} onPress={handleTransaction}>
+        <TouchableOpacity style={SharedStyle.PanelButton} onPress={handleTransaction()}>
           <Text style={SharedStyle.PanelButtonText}>Send</Text>
         </TouchableOpacity>
       </View>

@@ -54,10 +54,9 @@ const authenticate = async (email, username) => {
   users.filter(user => {
     if (user.get('email') === email || user.get('username') === username) {
       var Id=user.get('userIdAccess');
-      global.USER=Id;
-      console.log(global.USER)
+      
       console.log("user exists")
-      return (recordExists = true);
+      return user;
     }
     return (recordExists = false);
   });
@@ -76,9 +75,9 @@ const LoginScreen = (props) => {
   function handleLogin() {
     console.log('checking...')
     authenticate(userEmail, userName)
-      // .then((user) => setUser(user))
-      // .catch((error) => setError());
-    .then((user) => setUser({})); // TODO wire API
+         .then((newUser) => setUser({})); 
+      
+    // TODO wire API
   }
 
   return (
