@@ -27,8 +27,6 @@ import styles from '../styles/HomeScreen';
 import { Share } from "react-native";
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 
-//took out class. Getting the hot load error on snack.
-//expo was crashing try to find the bug. Configure android studio.
 
 
 const Home = ({ navigation }) => {
@@ -115,29 +113,32 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
       <View>
-        <View style={SharedStyle.header}>
-          <Text style={SharedStyle.titleText}>Welcome back, Gabriel</Text>
+        <View style={[SharedStyle.header,  {paddingTop: 45}]}>
+          <Text style={SharedStyle.TitleText}>Welcome back, Gabriel</Text>
         </View>
-        <View style={styles.profile}>
-          <Image
-            source={{
-              uri:
-                "https://scontent.fagc1-2.fna.fbcdn.net/v/t31.0-8/20017494_1570223453010098_2798752839256677297_o.jpg" +
-                "?_nc_cat=108&ccb=2&_nc_sid=730e14&_nc_ohc=Y_mZcslnbsIAX95p6tF&_nc_ht=scontent.fagc1-2.fna&oh=78f39c7c6e0d85e6e503587f409c6d20&oe=603CC6F9",
-            }}
-            style={styles.ProfileImage}
-          />
-          <Text style={{ color: "black", paddingLeft: 20}}>
-            Account ID
-          </Text>
-          <View style={styles.ProfileImageNotification}></View>
-        </View>
+        <TouchableOpacity>
+          <View style={styles.profile}>
+            <Image
+              source={{
+                uri:
+                  "https://scontent.fagc1-2.fna.fbcdn.net/v/t31.0-8/20017494_1570223453010098_2798752839256677297_o.jpg" +
+                  "?_nc_cat=108&ccb=2&_nc_sid=730e14&_nc_ohc=Y_mZcslnbsIAX95p6tF&_nc_ht=scontent.fagc1-2.fna&oh=78f39c7c6e0d85e6e503587f409c6d20&oe=603CC6F9",
+              }}
+              style={styles.ProfileImage}
+            />
+            <Text style={{ color: "black", paddingLeft: 20}}>
+              Account ID
+            </Text>
+            <View style={styles.ProfileImageNotification}></View>
+          </View>
+        </TouchableOpacity>
 
         <View>
           <View style={SharedStyle.CardDisplay}>
             <FlatList
               contentContainerStyle={SharedStyle.CardContentList}
               horizontal
+              disableScrollViewPanResponder
               data={Operations}
               renderItem={({ item }) => {
                 return (
@@ -160,6 +161,7 @@ const Home = ({ navigation }) => {
             />
 
             <FlatList
+             style={{paddingBottom: 10}}
               contentContainerStyle={SharedStyle.CardContentList}
               horizontal
               data={Users}
@@ -185,6 +187,7 @@ const Home = ({ navigation }) => {
 
       <View>
         <SlidingUpPanel
+          
           ref={ModalRef}
           draggableRange={dragRange}
           animatedValue={_draggedValue}
@@ -202,7 +205,7 @@ const Home = ({ navigation }) => {
             </View>
             <View style={{ height: 500, paddingBottom: 10 }}>
               <FlatList
-                data={Users}
+                data={Users.slice(0, 6)}
                 keyExtractor={(item) => item.key}
                 renderItem={({ item }) => {
                   return (

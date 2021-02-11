@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useState, useRef, createRef } from "react";
 import {
   SafeAreaView,
@@ -8,7 +9,7 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
-  //import {Id} from './Global.js';
+  
 
 //import SwipeUpDown from 'react-native-swipe-up-down';
 //import SlidingUpPanel from 'rn-sliding-up-panel';
@@ -18,6 +19,7 @@ import {
 //import styled from "styled-components/native";
 //import {MaterialIcons} from '@expo/vector-icons';
 //import { Entypo } from '@expo/vector-icons';
+
 import {
   View,
   Text,
@@ -29,20 +31,22 @@ import {
 } from "react-native";
 import useUser from '../../user/useUser';
 //import AsyncStorage from '@react-native-async-storage/async-storage';
+
 //import {base} from 'airtable'
 
 import SharedStyle from '../styles/shared';
 import styles from '../styles/Login';
 const Airtable = require('airtable');
 const data = require('./DataController.js');
+
 import { ServerStyleSheet } from "styled-components";
-//export const userId=
+
 
 const base = new Airtable({
   apiKey:"keykefT9YD5rhkuFg",
 }).base('appg4L9uWpNhonYHS');
 const table = base('Accounts');
-//const USER_ID='@save_userid'
+'
 //import Airtable from '../airtable'
 //import getAirtableRecords from './getAirtableRecords'
 
@@ -67,10 +71,9 @@ const authenticate = async (email, username) => {
     console.log("stored used id : " + userId);
     console.log("user exists");
   }
-  // await AsyncStorage.setItem(USER_ID,userId);
+
   console.log("saved");
-  //var Id= await AsyncStorage.getItem(USER_ID);
-  //console.log(Id);
+ 
   console.log({user, userId});
   return {
     id: user.get("userIdAccess"),
@@ -78,16 +81,6 @@ const authenticate = async (email, username) => {
     username: user.get("username"),
   };
 };
-
-  
-/*const users = await data.getAirtableRecords(table, options);
-  const user=users.find(user=>user.email===email || user.username===username)
-  //console.log(user.userIdAccess);
-  var test=user.username;
-  console.log(test);
-  console.log('user exists');   
-  return user
-};*/
 const LoginScreen = (props) => {
   const {setUser} = props
   const [userPassword, setUserPassword] = useState("");
@@ -105,17 +98,17 @@ const LoginScreen = (props) => {
         setUser(newUser)
       });
   }
-  // TODO wire API
+
 
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>TOKA</Text>
 
       <View style={styles.loginContainer}>
-        <View style={styles.inputView}>
+        <View style={SharedStyle.InputView}>
           <TextInput
-            style={styles.inputText}
-            placeholder=" Username..."
+            style={SharedStyle.InputText}
+            placeholder="Username"
             placeholderTextColor="white"
             onChangeText={(UserName) => setUserName(UserName)}
             onSubmitEditing={() =>
@@ -125,11 +118,11 @@ const LoginScreen = (props) => {
           />
         </View>
 
-        <View style={styles.inputView}>
+        <View style={SharedStyle.InputView}>
           <TextInput
             secureTextEntry
-            style={styles.inputText}
-            placeholder=" Password..."
+            style={SharedStyle.InputText}
+            placeholder="Password"
             placeholderTextColor="white"
             onChangeText={(UserPassword) => setUserPassword(UserPassword)}
             ref={passwordInputRef}

@@ -1,10 +1,11 @@
 
 import { StyleSheet } from 'react-native';
+import Colors from './colors';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: Colors.white,
 
     display: "flex",
     flexDirection: "column",
@@ -23,8 +24,9 @@ export default StyleSheet.create({
     alignItems: "center",
     padding: 10,
 
-    borderBottomColor: 'grey',
-    borderBottomWidth: 1
+    borderBottomColor: "#fcbf49",
+    //borderBottomColor: Colors.gray,
+    borderBottomWidth: 1,
   },
 
   ProfileImage: {
@@ -36,12 +38,12 @@ export default StyleSheet.create({
   ProfileImageNotification: {
     height: 12,
     width: 12,
-    backgroundColor: "#4853ef",
+    backgroundColor: Colors.orange,
     borderRadius: 6,
     position: "absolute",
     right: 6,
     borderWidth: 2,
-    borderColor: "#000",
+    borderColor: 'white',
   },
 
   SlideUp: {
@@ -49,8 +51,8 @@ export default StyleSheet.create({
     paddingTop: 0,
 
     flex: 1,
-    backgroundColor: "white",
-    borderColor: "grey",
+    backgroundColor: Colors.white,
+    borderColor: Colors.gray,
     borderWidth: 1,
     borderRadius: 24,
   },
@@ -58,7 +60,7 @@ export default StyleSheet.create({
   PanelHandle: {
     height: 6,
     width: 50,
-    backgroundColor: "grey",
+    backgroundColor: Colors.gray,
     borderRadius: 6,
     alignSelf: "center",
     marginTop: 6,
@@ -66,7 +68,7 @@ export default StyleSheet.create({
 
   PanelItemContainer: {
     borderWidth: 0.4,
-    borderColor: "#666",
+    borderColor: Colors.gray,
     padding: 14,
     borderRadius: 6,
     flexDirection: "row",
@@ -78,7 +80,7 @@ export default StyleSheet.create({
   PanelImage: {
     width: 30,
     height: 30,
-    backgroundColor: "#000",
+    backgroundColor: Colors.white,
     borderRadius: 40,
   },
 });

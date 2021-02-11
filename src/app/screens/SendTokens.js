@@ -1,42 +1,15 @@
 import React from "react";
-import {
-  SafeAreaView,
-  Image,
-  TouchableWithoutFeedback,
-  Button,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
-import { useState, useRef, createRef } from "react";
-import SwipeUpDown from "react-native-swipe-up-down";
-//import SlidingUpPanel from 'rn-sliding-up-panel';
-//import FlatList from 'react-native-web';
-import { StatusBar } from "expo-status-bar";
-import styled from "styled-components/native";
-import { Header } from "react-native-elements";
-import { AntDesign } from "@expo/vector-icons";
+import { SafeAreaView, TouchableOpacity } from "react-native";
+import { useState, createRef } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import {
-  View,
-  Text,
-  Dimensions,
-  StyleSheet,
-  Animated,
-  FlatList,
-} from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { View, Text, FlatList } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Container } from "native-base";
 import styles from "../styles/SendTokens";
 import SharedStyle from "../styles/shared";
+
 import { Share } from "react-native";
 import useUser from '../../user/useUser';
-//import AsyncStorage from "@react-native-async-storage/async-storage";
-//import {Icon, Container, Header, Content, Right} from 'native-base';
-//add on change drop down menu
 
-//will add vendor Id
 
 const transaction =  ( userId,  transactionToken, transactionAmount, transactionMemo) => {
   let user='recoBCkJWolsRETIr' 
@@ -48,6 +21,7 @@ const transaction =  ( userId,  transactionToken, transactionAmount, transaction
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
+
       userId,
       vendorId:'recg5IEL4f2QNLkHK' ,
       fee: '1',
@@ -65,36 +39,25 @@ const transaction =  ( userId,  transactionToken, transactionAmount, transaction
       }),
    )}
 
-
-const Users = [
+const Operations = [
   {
     key: "1",
-    userImage:
-      "https://images.pexels.com/photos/4473870/pexels-photo-4473870.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    userName: "Mom",
-    transactionDate: "25 April 20",
-    amount: "JVT 70",
-    credit: true,
+    text: "Address",
+    icon: "add",
+    operation: () => console.log("unimplemented")
   },
-
   {
     key: "2",
-    userImage:
-      "https://images.pexels.com/photos/1863625/pexels-photo-1863625.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    userName: "Nola CoffeeShop",
-    transactionDate: "14 March 20",
-    amount: "JVT 12",
-    credit: true,
+    text: "Contact",
+    icon: "supervisor-account",
+    operation: () => console.log("unimplemented")
   },
   {
     key: "3",
-    userName: "Coftale CoffeeShop",
-    userImage:
-      "https://images.pexels.com/photos/1402407/pexels-photo-1402407.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    transactionDate: "05 March 20",
-    amount: "JVT 40",
-    credit: true,
-  },
+    text: "Scan",
+    icon: "qr-code-scanner",
+    operation: () => console.log("unimplemented")
+  }
 ];
 
 export default SendTokens = () => {
@@ -109,11 +72,7 @@ export default SendTokens = () => {
   const memoInputRef = createRef();
   const amountInputRef = createRef();
   const user = useUser()
-  //var user=  AsyncStorage.getItem(USER_ID);
-  //console.log(user);
- 
   
-  //console.log(user);
   
   function handleTransaction(){
     console.log('starting transaction')
@@ -127,7 +86,7 @@ export default SendTokens = () => {
   return (
     <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
       <View style={SharedStyle.header}>
-        <Text style={SharedStyle.titleText}>
+        <Text style={SharedStyle.TitleText}>
           Send Tokens
         </Text>
       </View>
@@ -136,17 +95,20 @@ export default SendTokens = () => {
         <FlatList
           contentContainerStyle={SharedStyle.CardContentList}
           horizontal
-          data={Users}
+          data={Operations}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity>
+              <TouchableOpacity onPress={item.operation}>
                 <View style={SharedStyle.AddUser}>
-                  <Image
-                    style={SharedStyle.AddUserIconbg}
-                    source={{ uri: item.userImage }}
-                  />
-                  <Text style={SharedStyle.CardText} >
-                    {item.userName}
+                  <View style={SharedStyle.AddUserIconbg}>
+                    <MaterialIcons
+                      name={item.icon}
+                      color="white"
+                      size={28}
+                    />
+                  </View>
+                  <Text style={SharedStyle.CardText}>
+                    {item.text}
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -156,19 +118,19 @@ export default SendTokens = () => {
       </View>
 
       <View style={styles.form}>
-        <View style={styles.inputView}>
+        <View style={SharedStyle.InputView}>
           <TextInput
-            style={styles.inputText}
-            placeholder="Choose Token..."
+            style={SharedStyle.InputText}
+            placeholder="Choose Token"
             placeholderTextColor="white"
             onChangeText={(Token)=> setToken(Token)}
             onSubmitEditing={()=>amountInputRef.current && amountInputRef.current.focus()}
             blurOnSubmit={false} 
           />
         </View>
-        <View style={styles.inputView}>
+        <View style={SharedStyle.InputView}>
           <TextInput
-            style={styles.inputText}
+            style={SharedStyle.InputText}
             placeholder="Amount"
             ref={amountInputRef}
             placeholderTextColor="white"
@@ -176,11 +138,11 @@ export default SendTokens = () => {
             onSubmitEditing={()=>memoInputRef.current && memoInputRef.current.focus()}
           />
         </View>
-        <View style={styles.inputView}>
+        <View style={SharedStyle.InputView}>
           <TextInput
-            style={styles.inputText}
+            style={SharedStyle.InputText}
             ref={memoInputRef}
-            placeholder="Memo(Optional)...."
+            placeholder="Memo (Optional)"
             placeholderTextColor="white"
             onChangeText={(Memo)=> setAmount(Memo)}
             
