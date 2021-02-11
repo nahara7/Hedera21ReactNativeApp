@@ -34,7 +34,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 const Drawer = createDrawerNavigator();
 
 export default function Navigator() {
-  // User | null
+
   const [user, setUser] = useState(null);
 
   return (

@@ -6,9 +6,11 @@ import { View, Text, FlatList } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import styles from "../styles/SendTokens";
 import SharedStyle from "../styles/shared";
+import { Entypo } from '@expo/vector-icons';
 
 import { Share } from "react-native";
 import useUser from '../../user/useUser';
+import { Navigation } from "react-native-navigation";
 
 
 const transaction =  ( userId,  transactionToken, transactionAmount, transactionMemo) => {
@@ -39,18 +41,30 @@ const transaction =  ( userId,  transactionToken, transactionAmount, transaction
       }),
    )}
 
-const Operations = [
+ 
+  export default SendTokens=({Navigation})=>{  
+ 
+    function navigateToContacts() {
+      Navigation.navigate('Contacts')
+    }
+  
+    const Operations = [
+ 
+ 
   {
     key: "1",
-    text: "Address",
-    icon: "add",
+    text: "Vendor",
+    icon: "storefront",
     operation: () => console.log("unimplemented")
   },
   {
+
+
+    
     key: "2",
     text: "Contact",
     icon: "supervisor-account",
-    operation: () => console.log("unimplemented")
+    operation: navigateToContacts
   },
   {
     key: "3",
@@ -60,7 +74,9 @@ const Operations = [
   }
 ];
 
-export default SendTokens = () => {
+//export default SendTokens = () => {
+  
+  
   
   const [vendorId, setVendorId] = useState("");
   const [memo, setMemo] = useState("");
@@ -85,9 +101,9 @@ export default SendTokens = () => {
   
   return (
     <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
-      <View style={SharedStyle.header}>
+      <View style={[SharedStyle.header, {paddingTop:45, paddingLeft: 20}]}>
         <Text style={SharedStyle.TitleText}>
-          Send Tokens
+              Send Tokens
         </Text>
       </View>
 
@@ -117,7 +133,7 @@ export default SendTokens = () => {
         />
       </View>
 
-      <View style={styles.form}>
+      <View style={[styles.form, {paddingBottom: 45}]}>
         <View style={SharedStyle.InputView}>
           <TextInput
             style={SharedStyle.InputText}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   SafeAreaView,
   Image,
@@ -23,36 +23,67 @@ import {
   FlatList,
 } from "react-native";
 import SharedStyle from '../styles/shared';
+import useUser from '../../user/useUser';
 import styles from '../styles/HomeScreen';
 import { Share } from "react-native";
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 
 
-const getuserBalance =  () => {
-  let user='recoBCkJWolsRETIr' 
-  console.log('executing')
-  fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/account/userBalance/',{
+function  getuserAccountId(loggedInUser){
+ 
+  console.log('executing');
+  fetch ('http://localhost:8080/api/v1.0/account/userAccountId/',{
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      baseId:user,
+      baseId:loggedInUser.id,
       
     })
    }) .then((response)=> response.json()
       .then((responseJson)=>{
-        console.log('getting  token relationships')
-        var tokens=responseJson.status;
-        console.log(tokens);
+        console.log('getting user account id')
+        var accountId=responseJson;
+        
+        //update global var
+        console.log(accountId);
+        
+      })
+      .catch((error)=>{
+        console.error(error)
+      }),
+   )}
+
+
+const getuserBalance =  (userId) => {
+  //TO DO -- render
+  let user='recoBCkJWolsRETIr' 
+  console.log('executing')
+  fetch ('http://localhost:8080/api/v1.0/account/userBalance/',{
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      baseId:userId,
+      
+    })
+   }) .then((response)=> response.json()
+      .then((responseJson)=>{
+        console.log('')
+        var accountBalance=responseJson;
+        console.log(accountBalance);
         return responseJson;
       })
       .catch((error)=>{
         console.error(error)
       }),
    )}
-   const getuserTokenAssociation =  () => {
+   const getuserTokenAssociation =  (userId) => {
+    //TO DO -- render
     let user='recoBCkJWolsRETIr' 
     console.log('executing')
     fetch ('https://still-coast-11655.herokuapp.com/api/v1.0//userTokenAssociate/',{
@@ -62,7 +93,7 @@ const getuserBalance =  () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        baseId:user,
+        baseId:userId,
         
       })
      }) .then((response)=> response.json()
@@ -76,9 +107,15 @@ const getuserBalance =  () => {
           console.error(error)
         }),
      )}
+    
 
 const Home = ({ navigation }) => {
-  //demo users
+  const user=useUser()
+
+  console.log(user.id)
+  const [userAccountId, setUserAccountId]=useState("");
+  
+  
   const Users = [
     {
       key: "1",
@@ -135,6 +172,8 @@ const Home = ({ navigation }) => {
   const carouselRef = useRef(null);
 
   const RenderItem = ({ item }) => {
+    
+    
     return (
       <TouchableWithoutFeedback>
         <Image
@@ -151,37 +190,38 @@ const Home = ({ navigation }) => {
   });
 
   const _draggedValue = new Animated.Value(180);
-
-  function navigateToSendTokens() {
+   function navigateToSendTokens() {
     navigation.navigate('SendTokens')
   }
-
   const ModalRef = useRef(null);
 
   return (
     <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
       <View>
         <View style={[SharedStyle.header,  {paddingTop: 45}]}>
-          <Text style={SharedStyle.TitleText}>Welcome back, Gabriel</Text>
+          
+          <Text style={SharedStyle.TitleText}>Welcome back,</Text>
         </View>
-        <TouchableOpacity>
-          <View style={styles.profile}>
-            <Image
-              source={{
-                uri:
-                  "https://scontent.fagc1-2.fna.fbcdn.net/v/t31.0-8/20017494_1570223453010098_2798752839256677297_o.jpg" +
-                  "?_nc_cat=108&ccb=2&_nc_sid=730e14&_nc_ohc=Y_mZcslnbsIAX95p6tF&_nc_ht=scontent.fagc1-2.fna&oh=78f39c7c6e0d85e6e503587f409c6d20&oe=603CC6F9",
-              }}
-              style={styles.ProfileImage}
-            />
-            <Text style={{ color: "black", paddingLeft: 20}}>
+        <View style={{ backgrounColor: 'white', justifyContent: 'center', paddingLeft: 515, paddingTop: 490, alignItems: 'center', flex: 1, position: 'absolute'}}>
+        <TouchableOpacity style={{ position: 'absolute', paddingBottom: 10, backgroundColor: 'white'}}>
+         {/*} <View style={styles.profile}>*/}
+            <Image 
+            style={{justifyContent: 'center', height: 300, width: 600.61, backgroundColor: 'white'}}
+            source={require('./Mask.png')}>
+            
+            
+            </Image>
+           {/* </View>*/}
+            <Text 
+            style={{ color: "black", paddingLeft: 20}}>
               Account ID
             </Text>
             <View style={styles.ProfileImageNotification}></View>
-          </View>
+         {/* </View>*/}
         </TouchableOpacity>
+        </View>
 
-        <View>
+        <View style={{paddingTop: 170}}>
           <View style={SharedStyle.CardDisplay}>
             <FlatList
               contentContainerStyle={SharedStyle.CardContentList}
@@ -234,7 +274,7 @@ const Home = ({ navigation }) => {
       </View>
 
       <View>
-        <SlidingUpPanel
+       {/*} <SlidingUpPanel
           
           ref={ModalRef}
           draggableRange={dragRange}
@@ -330,7 +370,7 @@ const Home = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-        </SlidingUpPanel>
+        </SlidingUpPanel>*/}
     </View>
   </SafeAreaView>
   );

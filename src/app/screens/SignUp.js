@@ -61,7 +61,9 @@ const SignUpScreen = (props) => {
   const userRetypePasswordInputRef = createRef();
 
   //so no field are empty
-
+  
+  
+ 
   const handleSubmitButton = () => {
     setErrortext("");
     if (!userName) {
@@ -81,7 +83,7 @@ const SignUpScreen = (props) => {
     //return type
     setLoading(true);
 
-    var dataToSend = {
+    /*var dataToSend = {
       username: userName,
       email: userEmail,
       password: userPassword,
@@ -92,9 +94,9 @@ const SignUpScreen = (props) => {
       var encodedValue = encodeURIComponent(dataToSend[key]);
       formBody.push(encodedKey + "=" + encodedValue);
     }
-    formBody = formBody.join("&");
+    formBody = formBody.join("&");*/
 
-    base("Accounts").create(
+    /*base("Accounts").create(
       [
         {
           fields: {
@@ -113,9 +115,9 @@ const SignUpScreen = (props) => {
           console.log(record.getRecordId);
         });
       }
-    );
+    );*/
 
-    /*fetch('http://localhost:8080/api/v1.0/createUser', {
+    fetch('http://localhost:8080/api/v1.0/createUser', {
     method: 'POST',
     body: formBody,
     headers: {
@@ -123,11 +125,16 @@ const SignUpScreen = (props) => {
       'Content-Type':
       'application/x-www-form-urlencoded;charset=UTF-8',
     },
+    body: JSON.stringify({
+      username: userName,
+      password: userPassword,
+      email: userEmail
+
+    })
   })
     .then((response) => response.json())
     .then((responseJson) => {
-      //Hide Loader
-      setLoading(false);
+      console.log("creating user")
       console.log(responseJson);
       // If server response message same as Data Matched
       if (responseJson.status === 'success') {
@@ -143,12 +150,8 @@ const SignUpScreen = (props) => {
       //Hide Loader
       setLoading(false);
       console.error(error);
-    });*/
+    });
   };
-
-  //if(isRegistraionSuccess){*/
-
-  //<View style={styles.container}>
   return (
     <View>
       <Header
