@@ -29,7 +29,7 @@ import { Share } from "react-native";
 
 //took out class. Getting the hot load error on snack.
 //expo was crashing try to find the bug. Configure android studio.
-//take out navigator for now and work on pages seperately for sake of moving forward
+
 
 const Home = ({ navigation }) => {
   //demo users
@@ -113,7 +113,7 @@ const Home = ({ navigation }) => {
   const ModalRef = useRef(null);
 
   return (
-    <SafeAreaView style={SharedStyle.container}>
+    <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
       <View>
         <View style={SharedStyle.header}>
           <Text style={SharedStyle.titleText}>Welcome back, Gabriel</Text>

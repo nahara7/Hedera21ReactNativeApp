@@ -33,6 +33,31 @@ import SharedStyle from "../styles/shared";
 import { Share } from "react-native";
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 //add on change drop down menu
+
+const transaction =  (vendorTransactionId, transactionToken, transactionAmount, transactionMemo) => {
+  //call global var
+  fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/transaction/userVendor',{
+    method: 'POST',
+    headers: {
+     'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      userId: global.USER,
+      vendorId: vendorTransactionId,
+      fee: transactionAmount,
+      //memo optional
+    }),
+   }) .then((response)=> response.json()
+      .then((responseJson)=>{
+        console.log('getting receipt')
+        return responseJson.status;
+      })
+      .catch((error)=>{
+        console.error(error)
+      }),
+   )}
+
+
 const Users = [
   {
     key: "1",
@@ -65,8 +90,26 @@ const Users = [
 ];
 
 export default SendTokens = () => {
+  
+  onst [vendorId, setVendorId] = useState("");
+  const [memo, setMemo] = useState("");
+  const [token, setToken] = useState("");
+  const[amount, setAmount]= userSTate("");
+
+  const vendorIdInputRef=createRef();
+  const tokenIdInputRef=createRef();
+  const memoInputRef=createRef();
+  const amountInputRef=createRef();
+  
+  function handleTransaction(){
+    console.log('starting transaction')
+    transaction(vendorId, token, amount, memo)
+    //.then
+  }
+  
+  
   return (
-    <SafeAreaView style={SharedStyle.container}>
+    <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
       <View style={SharedStyle.header}>
         <Text style={SharedStyle.titleText}>
           Send Tokens

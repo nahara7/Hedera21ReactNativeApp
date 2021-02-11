@@ -1,4 +1,4 @@
-import Airtable from 'airtable';
+/*import Airtable from 'airtable';
 
 Airtable.configure({
   endpointUrl: "https://api.airtable.com",
@@ -6,4 +6,4 @@ Airtable.configure({
 });
 export var base = Airtable.base('appg4L9uWpNhonYHS');
 
-export default Airtable
+export default Airtable*/
