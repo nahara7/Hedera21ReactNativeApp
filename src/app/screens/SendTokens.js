@@ -61,7 +61,7 @@ const getRecipientInfo= async (recAccountId)=>{
   console.log("getting user first name")
   console.log(recId)
   let  firstname=null;
-  return fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/account/userFirstName',{
+    return fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/account/userFirstName',{
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -76,21 +76,23 @@ const getRecipientInfo= async (recAccountId)=>{
         console.log('getting firstname')
         firstname=responseName.toString();
         console.log(firstname);
-        
+        return firstname
       })
       .catch((error)=>{
         console.error(error)
       }),
       
-   )};
+   )
+   //return firstname
+  };
   
 
-const transaction =  ( userId, recipientId, transactionToken, transactionAmount, transactionMemo) => {
-  console.log('executing')
+const transaction =  ( userId, recId, recName, transactionToken, transactionAmount, transactionMemo) => {
+  console.log("executing")
   console.log(userId)
-  console.log(recipientId)
+  console.log(recId)
 
-  /*return fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/transaction/userUser',{
+  return fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/transaction/userUser',{
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -98,9 +100,9 @@ const transaction =  ( userId, recipientId, transactionToken, transactionAmount,
     },
     body: JSON.stringify({
 
-      senderId:  "recF9XCosctYVQp2f",
-      recipientId: "recn4Ms5zqULWfB6K",
-      fee: "1"
+      senderId:  userId,
+      recipientId: recId,
+      fee: '1'
       //memo optional
     })
    }) .then((response)=> response.json()
@@ -108,10 +110,6 @@ const transaction =  ( userId, recipientId, transactionToken, transactionAmount,
         console.log('getting receipt')
         var status=responseJson.status;
         console.log(status);
-        //name-->alert
-        getUserFirstName(recipientId)
-        .then((recName)=>
-        setRecipientName(recName))
         console.log(recName)
         paymentAlert(responseJson.status, recName)
         
@@ -119,9 +117,9 @@ const transaction =  ( userId, recipientId, transactionToken, transactionAmount,
       .catch((error)=>{
         console.error(error)
       }),
-   )};*/
+   )};
    //return userId
-    }
+    
  
   export default SendTokens=({Navigation})=>{  
  
@@ -165,11 +163,8 @@ const transaction =  ( userId, recipientId, transactionToken, transactionAmount,
   const [memo, setMemo] = useState("");
   const [token, setToken] = useState("");
   const[amount, setAmount]= useState("");
-  //[recipientName, setRecipientName]=null;
-  let recipientName=null;
-  const[recipientAccountId, setRecipientAccountId]= useState("");
-  //const[recipientId, setRecipientId]=useState("");
-   let recipientId=null;
+   const[recipientAccountId, setRecipientAccountId]= useState("");
+  
    
 
   const vendorIdInputRef = createRef();
@@ -177,41 +172,53 @@ const transaction =  ( userId, recipientId, transactionToken, transactionAmount,
   const memoInputRef = createRef();
   const amountInputRef = createRef();
   const user = useUser()
-  recipientName="save";
-  
+  var recipientName='save';
+  var recipientId="save";
    function handleTransaction(){
-    console.log('starting transaction')
-    
+    console.log('handleTransaction')
+    //var recipientName='save';
+    //var recipientId='save';
      getRecipientInfo(recipientAccountId)
      .then((RecipientId)=>{
       setRecipientId(RecipientId)
-      console.log("after function"+ recipientId)
-      getUserFirstName(recipientId)
-      .then((UserFirstName)=>{
-        setRecipientName(UserFirstName)
-        console.log(recipientName);
+      //console.log("after function"+ recipientId)
+     
+        
       })
-    })
-    console.log(recipientId + "back at handle")
-    console.log({userId: user.id, token, amount, memo})
-    transaction(user.id,recipientId, token, amount, memo)
+      console.log(recipientName + "handle Transaction")
+    
+    //console.log(recipientId + "back at handle")
+    //console.log({userId: user.id,recipientId, recipientName, token, amount, memo})
+    //transaction(user.id,recipientId,recipientName, token, amount, memo)
       //.then(() => {})
-  }
-  function handleRecipientAccountId(){
-    console.log("getting recipient account info"),
-    getRecipientInfo(recipientAccountId)
-    .then((RecipientId)=>{
-      setRecipientId(RecipientId)
-  })}
+    //};
   function setRecipientId(RecId){
-   recipientId=RecId;
-  // console.log(recipientId);
-   
-  }
-  function setRecipientName(name){
-    recipientName=name;
-  }
+    console.log("setting Id")
+     recipientId=RecId;
+    getUserFirstName(recipientId)
+    .then((UserFirstName)=>{
+      setRecipientName(UserFirstName)
   
+   }
+    )};
+    
+  
+  function setRecipientName(name){
+    console.log(recipientName)   
+    recipientName=name;
+    console.log("set recipientName" + recipientName)
+    console.log(recipientId + "back at handle")
+    console.log({userId: user.id,recipientId, recipientName, token, amount, memo})
+    transaction(user.id,recipientId,recipientName, token, amount, memo)
+      .then(() => {})
+  }
+};
+function handleRecipientAccountId(){
+  console.log("getting recipient account info"),
+  getRecipientInfo(recipientAccountId)
+  .then((RecipientId)=>{
+    setRecipientId(RecipientId)
+})};
   return (
     <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
       <View style={[SharedStyle.header, {paddingTop:45, paddingLeft: 20}]}>
