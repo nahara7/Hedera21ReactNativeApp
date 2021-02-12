@@ -26,6 +26,7 @@ import SharedStyle from '../styles/shared';
 import useUser from '../../user/useUser';
 import styles from '../styles/HomeScreen';
 import { Share } from "react-native";
+import {Footer, Title, Container} from 'native-base';
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 
 
@@ -283,10 +284,18 @@ const Users = [
               }}
             />
           </View>
-        </View>
+       
       
-
-     <View>
+     {/*<Container style={{ flex: 1, flexDirection: 'column', width:400, height: 70, paddingTop: 0}}>*/}
+       <View style={{paddingTop:50, width: 400, paddingLeft: 0, paddingRight: 60, backgroundColor: 'white'}}>
+        <Footer style={{backgroundColor: 'white'}}>
+                    <Title style={{ color: 'black', fontWeight: 'bold'}}>Footer</Title>
+                </Footer>
+                </View>
+              {/*} </Container>*/}
+              
+              
+              </View>
        {/* <SlidingUpPanel
           
           ref={ModalRef}
@@ -384,7 +393,7 @@ const Users = [
             </View>
           </View>
               </SlidingUpPanel>*/}
-              </View>
+             
   </SafeAreaView>
   );
 };
