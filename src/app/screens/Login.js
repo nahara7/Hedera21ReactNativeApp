@@ -85,6 +85,10 @@ const LoginScreen = (props) => {
   
   const user= useUser()
   
+  function navigateToSignUp() {
+    navigation.navigator('SignUp')
+  }
+  
   function handleLogin() {
     console.log('checking...')
     authenticate(userEmail, userName)
@@ -130,7 +134,9 @@ const LoginScreen = (props) => {
       </View>
 
       <View style={styles.helpContainer}>
-        <TouchableOpacity style={styles.help}>
+        <TouchableOpacity 
+        onPress={navigateToSignUp}
+        style={styles.help}>
           <Text style={styles.loginText}>Don't have an account? Sign up.</Text>
         </TouchableOpacity>
 

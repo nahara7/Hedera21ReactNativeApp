@@ -38,7 +38,7 @@ import {
   TouchableNativeFeedback,
 } from "react-native-gesture-handler";
 
-const SignUpScreen = (props) => {
+export default SignUpScreen = (props) => {
   var Airtable = require("airtable");
   Airtable.configure({
     endpointUrl: "https://api.airtable.com",
@@ -59,12 +59,8 @@ const SignUpScreen = (props) => {
   const typeInputRef = createRef();
   const passwordInputRef = createRef();
   const userRetypePasswordInputRef = createRef();
-
-  //so no field are empty
-  
-  
- 
-  const handleSubmitButton = () => {
+    
+    const handleSubmitButton = () => {
     setErrortext("");
     if (!userName) {
       alert("Please fill Name");
@@ -83,7 +79,7 @@ const SignUpScreen = (props) => {
     //return type
     setLoading(true);
 
-    /*var dataToSend = {
+    var dataToSend = {
       username: userName,
       email: userEmail,
       password: userPassword,
@@ -94,9 +90,9 @@ const SignUpScreen = (props) => {
       var encodedValue = encodeURIComponent(dataToSend[key]);
       formBody.push(encodedKey + "=" + encodedValue);
     }
-    formBody = formBody.join("&");*/
+    formBody = formBody.join("&");
 
-    /*base("Accounts").create(
+    base("Accounts").create(
       [
         {
           fields: {
@@ -115,7 +111,7 @@ const SignUpScreen = (props) => {
           console.log(record.getRecordId);
         });
       }
-    );*/
+    );
 
     fetch('http://localhost:8080/api/v1.0/createUser', {
     method: 'POST',
@@ -279,7 +275,7 @@ const styles = StyleSheet.create({
     right: 0,
     height: 20,
     fontSize: 14,
-    lineHeight: 14, // <- line height should be corresponding to your font size
+    lineHeight: 14,
   },
   inputView: {
     width: 300,
@@ -335,4 +331,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-export default SignUpScreen;
+//export default SignUpScreen;

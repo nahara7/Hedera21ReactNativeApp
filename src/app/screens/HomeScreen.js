@@ -11,7 +11,6 @@ import { useState, useRef } from "react";
 // import SwipeUpDown from 'react-native-swipe-up-down';
 import SlidingUpPanel from "rn-sliding-up-panel";
 //import {StatusBar} from 'expo-status-bar';
-//import NavContainer from './Navigator';
 import styled from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
@@ -109,14 +108,18 @@ const getuserBalance =  (userId) => {
      )}
     
 
-const Home = ({ navigation }) => {
+  const Home = ({ navigation }) => {
   const user=useUser()
 
   console.log(user.id)
   const [userAccountId, setUserAccountId]=useState("");
   
+  {/*useEffect(()=>{
+    getuserAccountId(user).then((AccountId)=>{setUserAccountId(AccountId)
+  })
+},[user]);*/}
   
-  const Users = [
+const Users = [
     {
       key: "1",
       userImage:
@@ -212,10 +215,10 @@ const Home = ({ navigation }) => {
             
             </Image>
            {/* </View>*/}
-            <Text 
+           {/*} <Text 
             style={{ color: "black", paddingLeft: 20}}>
               Account ID
-            </Text>
+            </Text>*/}
             <View style={styles.ProfileImageNotification}></View>
          {/* </View>*/}
         </TouchableOpacity>
@@ -273,8 +276,8 @@ const Home = ({ navigation }) => {
         </View>
       </View>
 
-      <View>
-       {/*} <SlidingUpPanel
+     {/* <View>
+        <SlidingUpPanel
           
           ref={ModalRef}
           draggableRange={dragRange}
@@ -370,8 +373,8 @@ const Home = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-        </SlidingUpPanel>*/}
-    </View>
+        </SlidingUpPanel>
+              </View>*/}
   </SafeAreaView>
   );
 };

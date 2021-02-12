@@ -9,6 +9,7 @@ import Login from './Login';
 import SendTokens from './SendTokens.js';
 import SettingsScreen from'./SettingsScreen.js';
 import Contacts from './Wallet/Contacts'
+import SignUpScreen from './SignUp.js';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 //fix navigator and do not import navigator in other classes
@@ -66,6 +67,9 @@ export default function Navigator() {
               <Drawer.Screen name="Contacts" component={Contacts} />
               <Drawer.Screen name="SendTokens" component={SendTokens} />
               <Drawer.Screen name="Settings" component={SettingsScreen} />
+              {/*<Drawer.Screen name="Sign Up" component={SignUpScreen}/>*/}
+               
+              
               {/* Redeem */}
               {/* Scan */}
             </>
