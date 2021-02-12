@@ -20,6 +20,7 @@ import {
   StyleSheet,
   Animated,
   FlatList,
+  ImageBackground
 } from "react-native";
 import SharedStyle from '../styles/shared';
 import useUser from '../../user/useUser';
@@ -31,7 +32,7 @@ import { Share } from "react-native";
 function  getuserAccountId(loggedInUser){
  
   console.log('executing');
-  fetch ('http://localhost:8080/api/v1.0/account/userAccountId/',{
+  return fetch ('http://localhost:8080/api/v1.0/account/userAccountId/',{
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -60,7 +61,7 @@ const getuserBalance =  (userId) => {
   //TO DO -- render
   let user='recoBCkJWolsRETIr' 
   console.log('executing')
-  fetch ('http://localhost:8080/api/v1.0/account/userBalance/',{
+  return fetch ('http://localhost:8080/api/v1.0/account/userBalance/',{
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -205,26 +206,35 @@ const Users = [
           
           <Text style={SharedStyle.TitleText}>Welcome back,</Text>
         </View>
-        <View style={{ backgrounColor: 'white', justifyContent: 'center', paddingLeft: 515, paddingTop: 490, alignItems: 'center', flex: 1, position: 'absolute'}}>
+        <TouchableOpacity>
+          <View style={styles.profile}>
+            <Image
+              source={{
+                uri:
+                  "https://scontent.fagc1-2.fna.fbcdn.net/v/t31.0-8/20017494_1570223453010098_2798752839256677297_o.jpg" +
+                  "?_nc_cat=108&ccb=2&_nc_sid=730e14&_nc_ohc=Y_mZcslnbsIAX95p6tF&_nc_ht=scontent.fagc1-2.fna&oh=78f39c7c6e0d85e6e503587f409c6d20&oe=603CC6F9",
+              }}
+              style={styles.ProfileImage}
+            />
+            <Text style={{ color: "black", paddingLeft: 20}}>
+              Account ID
+            </Text>
+            <View style={styles.ProfileImageNotification}></View>
+        {/*<View style={{ backgrounColor: 'white', justifyContent: 'center', paddingLeft: 515, paddingTop: 490, alignItems: 'center', flex: 1, position: 'absolute'}}>
         <TouchableOpacity style={{ position: 'absolute', paddingBottom: 10, backgroundColor: 'white'}}>
-         {/*} <View style={styles.profile}>*/}
-            <Image 
-            style={{justifyContent: 'center', height: 300, width: 600.61, backgroundColor: 'white'}}
-            source={require('./Mask.png')}>
-            
-            
-            </Image>
-           {/* </View>*/}
-           {/*} <Text 
+         {/*} <View style={styles.profile}>*/
+           
+           /* </View>*/
+           /*} <Text 
             style={{ color: "black", paddingLeft: 20}}>
               Account ID
             </Text>*/}
             <View style={styles.ProfileImageNotification}></View>
-         {/* </View>*/}
+          </View>
         </TouchableOpacity>
         </View>
 
-        <View style={{paddingTop: 170}}>
+        <View style={{paddingBottom: 100}}>
           <View style={SharedStyle.CardDisplay}>
             <FlatList
               contentContainerStyle={SharedStyle.CardContentList}
@@ -274,10 +284,10 @@ const Users = [
             />
           </View>
         </View>
-      </View>
+      
 
-     {/* <View>
-        <SlidingUpPanel
+     <View>
+       {/* <SlidingUpPanel
           
           ref={ModalRef}
           draggableRange={dragRange}
@@ -373,8 +383,8 @@ const Users = [
               </TouchableOpacity>
             </View>
           </View>
-        </SlidingUpPanel>
-              </View>*/}
+              </SlidingUpPanel>*/}
+              </View>
   </SafeAreaView>
   );
 };
