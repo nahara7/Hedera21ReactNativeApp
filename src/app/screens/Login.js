@@ -46,7 +46,7 @@ const table = base('Accounts');
 
 const authenticate = async (email, username) => {
   console.log("starting search");
-  let userId='save'
+  let userid='save'
   
   const options = {
     filterByFormula: `OR(email = '${email}', username = '${username}')`,
@@ -60,14 +60,14 @@ const authenticate = async (email, username) => {
   const user = filteredUsers[0]
   console.log({user})
   if (user !== undefined) {
-    userId= user.get('userIdAccess');
-    console.log("stored used id : " + userId);
+    userid= user.get('userIdAccess');
+    console.log("stored used id : " + userid);
     console.log("user exists");
   }
 
   console.log("saved");
  
-  console.log({user, userId});
+  //console.log({user, userId});
   return {
     id: user.get("userIdAccess"),
     email: user.get("email"),

@@ -30,23 +30,25 @@ import {Footer, Title, Container} from 'native-base';
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 
 
-function  getuserAccountId(loggedInUser){
+/*function  getuserAccountId(loggedInUser){
  
-  console.log('executing');
-  return fetch ('http://localhost:8080/api/v1.0/account/userAccountId/',{
+  console.log('in accountId function');
+  console.log(loggedInUser);
+  return fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/account/userAccountId/',{
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      baseId:loggedInUser.id,
+      baseId:loggedInUser
       
     })
-   }) .then((response)=> response.json()
+   }) .then((response)=> response.text()
       .then((responseJson)=>{
         console.log('getting user account id')
         var accountId=responseJson;
+        return accountId
         
         //update global var
         console.log(accountId);
@@ -55,7 +57,7 @@ function  getuserAccountId(loggedInUser){
       .catch((error)=>{
         console.error(error)
       }),
-   )}
+   )}*/
 
 
 const getuserBalance =  (userId) => {
@@ -109,12 +111,77 @@ const getuserBalance =  (userId) => {
         }),
      )}
     
-
+     
   const Home = ({ navigation }) => {
   const user=useUser()
-
-  console.log(user.id)
-  const [userAccountId, setUserAccountId]=useState("");
+  var userAccountId='1'
+  getuserAccountId();
+  function  getuserAccountId(){
+ 
+    console.log('in accountId function');
+    //console.log(loggedInUser);
+    return fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/account/userAccountId/',{
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        baseId:user.id
+        
+      })
+     }) .then((response)=> response.text()
+        .then((responseJson)=>{
+          console.log('getting user account id')
+          userAccountId=responseJson;
+          //return accountId
+          
+          //update global var
+          console.log(userAccountId+ "after fetch");
+          
+        })
+        .catch((error)=>{
+          console.error(error)
+        }),
+     )}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  /*var userAccountId="1";
+  //accountId(user.id)
+  useEffect(()=>{
+  accountId()
+  })
+  const accountId =()=>{
+  //const user=useUser
+    console.log("in accountid")
+    getuserAccountId(user.id)
+      .then((HederaId)=>{
+        setUserAccountId(HederaId)
+      })
+      console.log(userAccountId)
+     }
+    /*getuserAccountId(userId)
+    .then((HederaId)=>{
+      setUserAccountId(HederaId)
+    })*/
+       //console.log(HederaId)
+   
+   
+   /*function setUserAccountId(accId){
+    console.log(userAccountId)
+    userAccountId=accId
+    console.log(userAccountId + "setting the var")
+   }
+  console.log(user.id)*/
+  //const [userAccountId, setUserAccountId]=useState("");
   
   {/*useEffect(()=>{
     getuserAccountId(user).then((AccountId)=>{setUserAccountId(AccountId)
@@ -207,7 +274,8 @@ const Users = [
           
           <Text style={SharedStyle.TitleText}>Welcome back,</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity
+        style={{backgroundColor: '#ff9e00', shadowColor: '#ffb600'}}>
           <View style={styles.profile}>
             <Image
               source={{
@@ -217,9 +285,16 @@ const Users = [
               }}
               style={styles.ProfileImage}
             />
-            <Text style={{ color: "black", paddingLeft: 20}}>
-              Account ID
+            <Text style={{color: 'black'}}>AccountId</Text>
+            <Text style={{ color: "black", paddingLeft: 20, fontWeight: 'bold'}}>
+              
+              0.0.71134
             </Text>
+            <View style={{paddingTop: 90, position: 'absolute',  justifyContent: 'center',paddingRight: 15}}>
+            <Image 
+            style={{width: 300, justifyContent: 'center'}}
+            source={require('./Group.png')}></Image>
+            </View>
             <View style={styles.ProfileImageNotification}></View>
         {/*<View style={{ backgrounColor: 'white', justifyContent: 'center', paddingLeft: 515, paddingTop: 490, alignItems: 'center', flex: 1, position: 'absolute'}}>
         <TouchableOpacity style={{ position: 'absolute', paddingBottom: 10, backgroundColor: 'white'}}>
@@ -289,7 +364,33 @@ const Users = [
      {/*<Container style={{ flex: 1, flexDirection: 'column', width:400, height: 70, paddingTop: 0}}>*/}
        <View style={{paddingTop:50, width: 400, paddingLeft: 0, paddingRight: 60, backgroundColor: 'white'}}>
         <Footer style={{backgroundColor: 'white'}}>
-                    <Title style={{ color: 'black', fontWeight: 'bold'}}>Footer</Title>
+        <FlatList
+              contentContainerStyle={SharedStyle.CardContentList}
+              horizontal
+              disableScrollViewPanResponder
+              data={Operations}
+              renderItem={({ item }) => {
+                return (
+                  <TouchableOpacity 
+                  onPress={item.operation}>
+                    <View >
+                      <View style={[SharedStyle.AddUserIconbg, {height: 20}]}>
+                        <MaterialIcons
+                          name={item.icon}
+                          color="white"
+                          size={28}
+                        />
+                      </View>
+                      <Text style={SharedStyle.CardText}>
+                        
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+
+                    {/*<Title style={{ color: 'black', fontWeight: 'bold'}}>Footer</Title>*/}
                 </Footer>
                 </View>
               {/*} </Container>*/}

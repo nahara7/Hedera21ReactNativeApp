@@ -10,7 +10,10 @@ import SendTokens from './SendTokens.js';
 import SettingsScreen from'./SettingsScreen.js';
 import Contacts from './Wallet/Contacts'
 import SignUpScreen from './SignUp.js';
+//import PayVendor from './PayVendor.js';
+
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+//import PayVendor from './SendTokensVendor.js';
 
 //fix navigator and do not import navigator in other classes
 //must determine how to implement into homescreen so that you can 
@@ -67,6 +70,7 @@ export default function Navigator() {
               <Drawer.Screen name="Contacts" component={Contacts} />
               <Drawer.Screen name="SendTokens" component={SendTokens} />
               <Drawer.Screen name="Settings" component={SettingsScreen} />
+              {/*<Drawer.screen name="Pay Vendor" component={PayVendor}/>*/}
               {/*<Drawer.Screen name="Sign Up" component={SignUpScreen}/>*/}
                
               
