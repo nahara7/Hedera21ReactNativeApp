@@ -11,6 +11,7 @@ import { Share } from "react-native";
 import useUser from '../../user/useUser';
 import { Navigation } from "react-native-navigation";
 import Airtable from 'airtable'
+import { Alert } from "react-native";
 const data = require('./DataController.js');
 
 const paymentAlert=(status, name)=>{
@@ -26,28 +27,41 @@ if(status=='SUCCESS'){
 }
 }
 
-const getRecipientInfo=async (recAccountId)=>{
- 
+const getRecipientInfo= async (recAccountId)=>{
+    console.log("getting recipient Id")
+    console.log(recAccountId)
+    let recId="";
   const base = new Airtable({
     apiKey:"keykefT9YD5rhkuFg",
   }).base('appg4L9uWpNhonYHS');
   const table = base('Users'); 
  
   const options = {
-    filterByFormula: (accountID = '${recAccountId}'),
+    filterByFormula: `AND(accountID = '${recAccountId}')`,
   };
-  const users = await data.getAirtableRecords(table, options);
-
-  const filteredUsers = users.filter((user) =>
-    user.get("accountId") === recAccountId);
-     console.log(user.get("accountId"))
-     console.log(user.get("userId"))
-    if(user!=undefined){
-     return user.get("userId")
-    } 
+  users =  await data.getAirtableRecords(table, options);
+  {/*filter !*/}
+   users.filter(user =>{
+    if (user.get("accountID") === recAccountId){
+    //console.log(user.get("accountID"))
+    console.log(user.get("userId")+ "this is the recipient userId")
+    recId=user.get("userId")
+    //return user.get("userId")
+    }else{
+      Alert.alert("User does not exist")
+      console.log("didn't find user")
+      setErrortext("User does not exist");
+      }
+     
+    })
+  
+    return recId; 
 };
  const getUserFirstName=(recId)=>{
-  fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/account/userFirstName',{
+  console.log("getting user first name")
+  console.log(recId)
+  let  firstname=null;
+  return fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/account/userFirstName',{
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -57,22 +71,26 @@ const getRecipientInfo=async (recAccountId)=>{
 
        baseId: recId 
     })
-   }) .then((response)=> response.json()
-      .then((responseJson)=>{
+   }) .then((response)=> response.text()
+      .then((responseName)=>{
         console.log('getting firstname')
-        var firstname=responseJson.status;
+        firstname=responseName.toString();
         console.log(firstname);
         
       })
       .catch((error)=>{
         console.error(error)
       }),
+      
    )};
   
 
 const transaction =  ( userId, recipientId, transactionToken, transactionAmount, transactionMemo) => {
   console.log('executing')
-  fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/transaction/userUser',{
+  console.log(userId)
+  console.log(recipientId)
+
+  /*return fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/transaction/userUser',{
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -80,9 +98,9 @@ const transaction =  ( userId, recipientId, transactionToken, transactionAmount,
     },
     body: JSON.stringify({
 
-      userId: userId,
-      vendorId: recipientId,
-      fee: transactionAmount
+      senderId:  "recF9XCosctYVQp2f",
+      recipientId: "recn4Ms5zqULWfB6K",
+      fee: "1"
       //memo optional
     })
    }) .then((response)=> response.json()
@@ -91,17 +109,19 @@ const transaction =  ( userId, recipientId, transactionToken, transactionAmount,
         var status=responseJson.status;
         console.log(status);
         //name-->alert
-        getUserFirstName(recipientId).then((recName)=>
+        getUserFirstName(recipientId)
+        .then((recName)=>
         setRecipientName(recName))
-        
-        paymentAlert(responseJson.status, recipientName)
+        console.log(recName)
+        paymentAlert(responseJson.status, recName)
         
       })
       .catch((error)=>{
         console.error(error)
       }),
-   )};
-
+   )};*/
+   //return userId
+    }
  
   export default SendTokens=({Navigation})=>{  
  
@@ -145,29 +165,52 @@ const transaction =  ( userId, recipientId, transactionToken, transactionAmount,
   const [memo, setMemo] = useState("");
   const [token, setToken] = useState("");
   const[amount, setAmount]= useState("");
-  const [recipientName, setRecipientName]=useState("");
+  //[recipientName, setRecipientName]=null;
+  let recipientName=null;
   const[recipientAccountId, setRecipientAccountId]= useState("");
-  const[recipientId, setRecipientId]=useState("");
-
-
+  //const[recipientId, setRecipientId]=useState("");
+   let recipientId=null;
+   
 
   const vendorIdInputRef = createRef();
   const tokenIdInputRef = createRef();
   const memoInputRef = createRef();
   const amountInputRef = createRef();
   const user = useUser()
+  recipientName="save";
   
-  
-  function handleTransaction(){
+   function handleTransaction(){
     console.log('starting transaction')
-    getRecipientInfo(recipientAccountId).then((RecipientId)=>{
+    
+     getRecipientInfo(recipientAccountId)
+     .then((RecipientId)=>{
       setRecipientId(RecipientId)
+      console.log("after function"+ recipientId)
+      getUserFirstName(recipientId)
+      .then((UserFirstName)=>{
+        setRecipientName(UserFirstName)
+        console.log(recipientName);
+      })
     })
+    console.log(recipientId + "back at handle")
     console.log({userId: user.id, token, amount, memo})
     transaction(user.id,recipientId, token, amount, memo)
-      .then(() => {})
+      //.then(() => {})
   }
-  
+  function handleRecipientAccountId(){
+    console.log("getting recipient account info"),
+    getRecipientInfo(recipientAccountId)
+    .then((RecipientId)=>{
+      setRecipientId(RecipientId)
+  })}
+  function setRecipientId(RecId){
+   recipientId=RecId;
+  // console.log(recipientId);
+   
+  }
+  function setRecipientName(name){
+    recipientName=name;
+  }
   
   return (
     <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
@@ -211,8 +254,9 @@ const transaction =  ( userId, recipientId, transactionToken, transactionAmount,
             style={SharedStyle.InputText}
             placeholder="Recipient Account Id"
             placeholderTextColor="white"
-            onChangeText={(RAccountID)=> setRecipientAccountId(RAccountID)}
-            onSubmitEditing={
+            onChangeText={
+              (RAccountID)=> setRecipientAccountId(RAccountID)}
+            onSubmitEditing={  handleRecipientAccountId,
               ()=>tokenIdInputRef.current && tokenIdInputRef.current.focus()}
             blurOnSubmit={false} 
           />
