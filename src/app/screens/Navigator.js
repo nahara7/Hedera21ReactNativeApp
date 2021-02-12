@@ -71,7 +71,7 @@ export default function Navigator() {
               <Drawer.Screen name="SendTokens" component={SendTokens} />
               <Drawer.Screen name="Settings" component={SettingsScreen} />
               {/*<Drawer.screen name="Pay Vendor" component={PayVendor}/>*/}
-              {/*<Drawer.Screen name="Sign Up" component={SignUpScreen}/>*/}
+              <Drawer.Screen name="Sign Up" component={SignUpScreen}/>
                
               
               {/* Redeem */}

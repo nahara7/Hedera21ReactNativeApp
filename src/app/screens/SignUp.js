@@ -38,7 +38,7 @@ import {
   TouchableNativeFeedback,
 } from "react-native-gesture-handler";
 
-export default SignUpScreen = (props) => {
+export default SignUpScreen = ({Navigation}) => {
   var Airtable = require("airtable");
   Airtable.configure({
     endpointUrl: "https://api.airtable.com",
@@ -113,13 +113,14 @@ export default SignUpScreen = (props) => {
       }
     );
 
-    fetch('http://localhost:8080/api/v1.0/createUser', {
+    fetch('https://still-coast-11655.herokuapp.com/api/v1.0/createUser', {
     method: 'POST',
     body: formBody,
     headers: {
       //Header Defination
-      'Content-Type':
-      'application/x-www-form-urlencoded;charset=UTF-8',
+       'Accept': 'application/json',
+      'Content-Type':'application/json',
+      
     },
     body: JSON.stringify({
       username: userName,
