@@ -19,14 +19,26 @@ export default StyleSheet.create({
 
   profile: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",
     padding: 10,
+    paddingVertical: 15,
 
-    borderBottomColor: "#fcbf49",
-    //borderBottomColor: Colors.gray,
+    borderBottomColor: Colors.lightOrange,
     borderBottomWidth: 1,
+    borderRadius: 12,
+
+    backgroundColor: Colors.orange,
+    shadowColor: "#ffb600"
+  },
+
+  profileInfo: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    width: "100%"
   },
 
   ProfileImage: {
@@ -41,7 +53,7 @@ export default StyleSheet.create({
     backgroundColor: Colors.orange,
     borderRadius: 6,
     position: "absolute",
-    right: 6,
+    right: 0,
     borderWidth: 2,
     borderColor: 'white',
   },

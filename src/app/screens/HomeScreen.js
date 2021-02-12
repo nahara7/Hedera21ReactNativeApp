@@ -274,28 +274,30 @@ const Users = [
           
           <Text style={SharedStyle.TitleText}>Welcome back,</Text>
         </View>
-        <TouchableOpacity
-        style={{backgroundColor: '#ff9e00', shadowColor: '#ffb600'}}>
+        <TouchableOpacity>
           <View style={styles.profile}>
-            <Image
-              source={{
-                uri:
-                  "https://scontent.fagc1-2.fna.fbcdn.net/v/t31.0-8/20017494_1570223453010098_2798752839256677297_o.jpg" +
-                  "?_nc_cat=108&ccb=2&_nc_sid=730e14&_nc_ohc=Y_mZcslnbsIAX95p6tF&_nc_ht=scontent.fagc1-2.fna&oh=78f39c7c6e0d85e6e503587f409c6d20&oe=603CC6F9",
-              }}
-              style={styles.ProfileImage}
-            />
-            <Text style={{color: 'black'}}>AccountId</Text>
-            <Text style={{ color: "black", paddingLeft: 20, fontWeight: 'bold'}}>
-              
-              0.0.71134
-            </Text>
-            <View style={{paddingTop: 90, position: 'absolute',  justifyContent: 'center',paddingRight: 15}}>
+            <View style={styles.profileInfo}>
+              <Image
+                source={{
+                  uri:
+                    "https://scontent.fagc1-2.fna.fbcdn.net/v/t31.0-8/20017494_1570223453010098_2798752839256677297_o.jpg" +
+                    "?_nc_cat=108&ccb=2&_nc_sid=730e14&_nc_ohc=Y_mZcslnbsIAX95p6tF&_nc_ht=scontent.fagc1-2.fna&oh=78f39c7c6e0d85e6e503587f409c6d20&oe=603CC6F9",
+                }}
+                style={styles.ProfileImage}
+              />
+              <Text style={{color: 'black', paddingLeft: 20}}>AccountId</Text>
+              <Text style={{ color: "black", paddingLeft: 20, fontWeight: 'bold'}}>
+                
+                0.0.71134
+              </Text>
+              <View style={styles.ProfileImageNotification}></View>
+            </View>
+          <View style={{marginTop: 10, justifyContent: 'center'}}>
             <Image 
             style={{width: 300, justifyContent: 'center'}}
             source={require('./Group.png')}></Image>
-            </View>
-            <View style={styles.ProfileImageNotification}></View>
+          </View>
+          </View>
         {/*<View style={{ backgrounColor: 'white', justifyContent: 'center', paddingLeft: 515, paddingTop: 490, alignItems: 'center', flex: 1, position: 'absolute'}}>
         <TouchableOpacity style={{ position: 'absolute', paddingBottom: 10, backgroundColor: 'white'}}>
          {/*} <View style={styles.profile}>*/
@@ -305,8 +307,6 @@ const Users = [
             style={{ color: "black", paddingLeft: 20}}>
               Account ID
             </Text>*/}
-            <View style={styles.ProfileImageNotification}></View>
-          </View>
         </TouchableOpacity>
         </View>
 
@@ -362,7 +362,7 @@ const Users = [
        
       
      {/*<Container style={{ flex: 1, flexDirection: 'column', width:400, height: 70, paddingTop: 0}}>*/}
-       <View style={{paddingTop:50, width: 400, paddingLeft: 0, paddingRight: 60, backgroundColor: 'white'}}>
+       <View style={{paddingTop:40, width: "90%", alignSelf: "center", backgroundColor: 'white'}}>
         <Footer style={{backgroundColor: 'white'}}>
         <FlatList
               contentContainerStyle={SharedStyle.CardContentList}

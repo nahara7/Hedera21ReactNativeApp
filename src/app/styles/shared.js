@@ -42,6 +42,7 @@ export default StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
+    alignItems: "center",
     overflow: "scroll",
    
   },
