@@ -27,6 +27,8 @@ import useUser from '../../user/useUser';
 import styles from '../styles/HomeScreen';
 import { Share } from "react-native";
 import {Footer, Title, Container} from 'native-base';
+
+
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 
 
@@ -234,8 +236,8 @@ const Users = [
     },
     {
       key: "3",
-      text: "Receive",
-      icon: "drafts",
+      text: "CashBack",
+      icon: "payments",
       operation: () => console.log("unimplemented")
     }
   ];
@@ -280,14 +282,15 @@ const Users = [
             <Image
               source={{
                 uri:
-                  "https://scontent.fagc1-2.fna.fbcdn.net/v/t31.0-8/20017494_1570223453010098_2798752839256677297_o.jpg" +
-                  "?_nc_cat=108&ccb=2&_nc_sid=730e14&_nc_ohc=Y_mZcslnbsIAX95p6tF&_nc_ht=scontent.fagc1-2.fna&oh=78f39c7c6e0d85e6e503587f409c6d20&oe=603CC6F9",
+                "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.tokenmaker.org%2F&psig=AOvVaw2ojmkB3vglEYfnxn7o0Dd0&ust=1613254220488000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJD0xLqu5e4CFQAAAAAdAAAAABAD",
+                 // "https://scontent.fagc1-2.fna.fbcdn.net/v/t31.0-8/20017494_1570223453010098_2798752839256677297_o.jpg" +
+                  //"?_nc_cat=108&ccb=2&_nc_sid=730e14&_nc_ohc=Y_mZcslnbsIAX95p6tF&_nc_ht=scontent.fagc1-2.fna&oh=78f39c7c6e0d85e6e503587f409c6d20&oe=603CC6F9",
               }}
               style={styles.ProfileImage}
             />
-            <Text style={{font: 'Open Sans',color: 'white', fontStyle: 'bold', paddingLeft: 50, paddingTop: 40 }}>AccountID 0.0.3426</Text>
-            <Text style={{ fontSize: 36, font: 'Open Sans', color: "white", fontWeight: 'bold', paddingBottom: 20, paddingLeft:145, position: 'absolute'}}>
-            0.0.71134
+            <Text style={{color: 'white',  paddingLeft: 50, paddingTop: 40 }}>AccountID 0.0.3426</Text>
+            <Text style={{ fontSize: 36, font: 'Open Sans', color: "white", fontWeight: 'bold', paddingBottom: 20, paddingLeft:185, position: 'absolute'}}>
+            25 JVT
             </Text>
             <View style={{paddingTop: 90, position: 'absolute',  justifyContent: 'center', paddingLeft: 50}}>
             <Image 
@@ -327,7 +330,7 @@ const Users = [
                           size={28}
                         />
                       </View>
-                      <Text style={SharedStyle.CardText}>
+                      <Text style={[SharedStyle.CardText, { fontStyle: 'bold'}]}>
                         {item.text}
                       </Text>
                     </View>

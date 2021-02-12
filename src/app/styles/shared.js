@@ -48,10 +48,11 @@ export default StyleSheet.create({
 
   CardText: {
     color: Colors.black,
-    textAlign: "center" 
+    textAlign: "center" ,
   },
 
   AddUser: {
+    //keep this for orange buttons on home screen
     height: 140,
     width: 100,
     borderColor: "#fcbf49",
@@ -60,6 +61,7 @@ export default StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     backgroundColor: Colors.white,
+    borderColor: Colors.orange,
     borderRadius: 10,
     margin: 7,
   },

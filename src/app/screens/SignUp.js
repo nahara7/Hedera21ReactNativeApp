@@ -63,7 +63,7 @@ export default SignUpScreen = ({Navigation}) => {
   const passwordInputRef = createRef();
   const userRetypePasswordInputRef = createRef();
   const firstNameInputRef=createRef();
-  const lastNameInputRef=creatRef();
+  const lastNameInputRef=createRef();
     
   
   const handleSubmitButton = () => {
@@ -169,7 +169,7 @@ export default SignUpScreen = ({Navigation}) => {
         }}
       />
 
-      <View style={[styles.container, { paddingTop: 200 }]}>
+      <View style={[styles.container, { paddingTop: 250 }]}>
         
       <View style={styles.inputView}>
           <TextInput
@@ -181,7 +181,7 @@ export default SignUpScreen = ({Navigation}) => {
             placeholderTextColor="white"
             underlineColorAndroid="transparent"
             onSubmitEditing={() =>
-             LastNameInputRef.current && lastNameInputRef.current.focus()
+             lastNameInputRef.current && lastNameInputRef.current.focus()
             }
             blurOnSubmit={false}
           />
@@ -276,7 +276,7 @@ export default SignUpScreen = ({Navigation}) => {
       </View>
 
       <TouchableOpacity
-        style={[styles.signUpButtonStyle, { marginTop: 150 }]}
+        style={[styles.signUpButtonStyle, { marginTop: 215 }]}
         activeOpacity={0.5}
         onPress={(console.log("creating account"), handleSubmitButton)}
       >
