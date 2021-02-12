@@ -38,7 +38,7 @@ import {
   TouchableNativeFeedback,
 } from "react-native-gesture-handler";
 
-export default SignUpScreen = (props) => {
+export default SignUpScreen = ({Navigation}) => {
   var Airtable = require("airtable");
   Airtable.configure({
     endpointUrl: "https://api.airtable.com",
@@ -54,13 +54,19 @@ export default SignUpScreen = (props) => {
   const [errortext, setErrortext] = useState("");
   const [userRetypePassword, setUserRetypePassword] = useState("");
   const [isRegistraionSuccess, setIsRegistraionSuccess] = useState(false);
-
+  const[firstName, setFirstName]=useState("");
+  const[lastName, setLastName]= useState("");
+  
+  const userNameInputRef=createRef();
   const emailInputRef = createRef();
   const typeInputRef = createRef();
   const passwordInputRef = createRef();
   const userRetypePasswordInputRef = createRef();
+  const firstNameInputRef=createRef();
+  const lastNameInputRef=createRef();
     
-    const handleSubmitButton = () => {
+  
+  const handleSubmitButton = () => {
     setErrortext("");
     if (!userName) {
       alert("Please fill Name");
@@ -113,18 +119,21 @@ export default SignUpScreen = (props) => {
       }
     );
 
-    fetch('http://localhost:8080/api/v1.0/createUser', {
+    fetch('https://still-coast-11655.herokuapp.com/api/v1.0/createUser', {
     method: 'POST',
     body: formBody,
     headers: {
       //Header Defination
-      'Content-Type':
-      'application/x-www-form-urlencoded;charset=UTF-8',
+       'Accept': 'application/json',
+      'Content-Type':'application/json',
+      
     },
     body: JSON.stringify({
       username: userName,
       password: userPassword,
-      email: userEmail
+      email: userEmail,
+      firstname: firstName,
+      lastname: lastName
 
     })
   })
@@ -160,7 +169,41 @@ export default SignUpScreen = (props) => {
         }}
       />
 
-      <View style={[styles.container, { paddingTop: 200 }]}>
+      <View style={[styles.container, { paddingTop: 250 }]}>
+        
+      <View style={styles.inputView}>
+          <TextInput
+            style={[styles.inputText]}
+            onChangeText={(FirstName) => setFirstName(FirstName)}
+            keyboardType="email-address"
+            returnKeyType="next"
+            placeholder="Enter Firstname"
+            placeholderTextColor="white"
+            underlineColorAndroid="transparent"
+            onSubmitEditing={() =>
+             lastNameInputRef.current && lastNameInputRef.current.focus()
+            }
+            blurOnSubmit={false}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={[styles.inputText]}
+            onChangeText={(LastName) => setLastName(LastName)}
+            keyboardType="email-address"
+            returnKeyType="next"
+            placeholder="Enter Lastname"
+            placeholderTextColor="white"
+            underlineColorAndroid="transparent"
+            ref={lastNameInputRef}
+            onSubmitEditing={() =>
+             userNameInputRef.current && userNameInputRef.current.focus()
+            }
+            blurOnSubmit={false}
+          />
+        </View>
+        
+        
         <View style={styles.inputView}>
           <TextInput
             style={[styles.inputText]}
@@ -170,6 +213,7 @@ export default SignUpScreen = (props) => {
             placeholder="Enter username"
             placeholderTextColor="white"
             underlineColorAndroid="transparent"
+            ref={userNameInputRef}
             onSubmitEditing={() =>
               emailInputRef.current && emailInputRef.current.focus()
             }
@@ -232,7 +276,7 @@ export default SignUpScreen = (props) => {
       </View>
 
       <TouchableOpacity
-        style={[styles.signUpButtonStyle, { marginTop: 150 }]}
+        style={[styles.signUpButtonStyle, { marginTop: 215 }]}
         activeOpacity={0.5}
         onPress={(console.log("creating account"), handleSubmitButton)}
       >

@@ -27,6 +27,8 @@ import useUser from '../../user/useUser';
 import styles from '../styles/HomeScreen';
 import { Share } from "react-native";
 import {Footer, Title, Container} from 'native-base';
+
+
 //import {Icon, Container, Header, Content, Right} from 'native-base';
 
 
@@ -234,8 +236,8 @@ const Users = [
     },
     {
       key: "3",
-      text: "Receive",
-      icon: "drafts",
+      text: "CashBack",
+      icon: "payments",
       operation: () => console.log("unimplemented")
     }
   ];
@@ -280,23 +282,21 @@ const Users = [
               <Image
                 source={{
                   uri:
-                    "https://scontent.fagc1-2.fna.fbcdn.net/v/t31.0-8/20017494_1570223453010098_2798752839256677297_o.jpg" +
-                    "?_nc_cat=108&ccb=2&_nc_sid=730e14&_nc_ohc=Y_mZcslnbsIAX95p6tF&_nc_ht=scontent.fagc1-2.fna&oh=78f39c7c6e0d85e6e503587f409c6d20&oe=603CC6F9",
+                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.tokenmaker.org%2F&psig=AOvVaw2ojmkB3vglEYfnxn7o0Dd0&ust=1613254220488000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJD0xLqu5e4CFQAAAAAdAAAAABAD",
                 }}
                 style={styles.ProfileImage}
               />
-              <Text style={{color: 'black', paddingLeft: 20}}>AccountId</Text>
-              <Text style={{ color: "black", paddingLeft: 20, fontWeight: 'bold'}}>
-                
-                0.0.71134
+              <Text style={{color: 'white',  paddingLeft: 50, paddingTop: 40 }}>AccountID 0.0.3426</Text>
+              <Text style={{ fontSize: 36, font: 'Open Sans', color: "white", fontWeight: 'bold', paddingBottom: 20, paddingLeft:185, position: 'absolute'}}>
+                25 JVT
               </Text>
               <View style={styles.ProfileImageNotification}></View>
             </View>
-          <View style={{marginTop: 10, justifyContent: 'center'}}>
-            <Image 
-            style={{width: 300, justifyContent: 'center'}}
-            source={require('./Group.png')}></Image>
-          </View>
+            <View>
+              <Image 
+              style={{width: 200, justifyContent: 'center'}}
+              source={require('./Group.png')}></Image>
+            </View>
           </View>
         {/*<View style={{ backgrounColor: 'white', justifyContent: 'center', paddingLeft: 515, paddingTop: 490, alignItems: 'center', flex: 1, position: 'absolute'}}>
         <TouchableOpacity style={{ position: 'absolute', paddingBottom: 10, backgroundColor: 'white'}}>
@@ -328,7 +328,7 @@ const Users = [
                           size={28}
                         />
                       </View>
-                      <Text style={SharedStyle.CardText}>
+                      <Text style={[SharedStyle.CardText, { fontStyle: 'bold'}]}>
                         {item.text}
                       </Text>
                     </View>
@@ -373,8 +373,8 @@ const Users = [
                 return (
                   <TouchableOpacity 
                   onPress={item.operation}>
-                    <View >
-                      <View style={[SharedStyle.AddUserIconbg, {height: 20}]}>
+                    <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
+                      <View style={[SharedStyle.AddUserIconbg, {height: 40}]}>
                         <MaterialIcons
                           name={item.icon}
                           color="white"

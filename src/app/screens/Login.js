@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useRef, createRef } from "react";
+import { createStackNavigator } from '@react-navigation/stack';
 import {
   SafeAreaView,
   Image,
@@ -32,7 +33,8 @@ import SharedStyle from '../styles/shared';
 import styles from '../styles/Login';
 import Airtable from 'airtable'
 const data = require('./DataController.js');
-
+import {useNavigation} from '@react-navigation/native';
+import Navigator from './Navigator.js'
 
 
 const base = new Airtable({
@@ -63,6 +65,8 @@ const authenticate = async (email, username) => {
     userid= user.get('userIdAccess');
     console.log("stored used id : " + userid);
     console.log("user exists");
+  }else{
+    Alert.alert("You username or password is incorrect")
   }
 
   console.log("saved");
@@ -74,19 +78,24 @@ const authenticate = async (email, username) => {
     username: user.get("username"),
   };
 };
-const LoginScreen = (props) => {
+const  LoginScreen = (props,{navigation}) => {
   const {setUser} = props
   const [userPassword, setUserPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  //const Navigation=useNavigation();
   
   const usernameInputRef = createRef();
   const passwordInputRef = createRef();
-  
+ // const {navigate}= navigation;
+ // console.log(navigate)
   const user= useUser()
   
+
   function navigateToSignUp() {
-    navigation.navigator('SignUp')
+   Navigator.current?.navigate('Sign Up');
+   console.log('about to navigate')
+   //this.props.navigation.navigate('Sign Up')
   }
   
   function handleLogin() {
@@ -135,9 +144,11 @@ const LoginScreen = (props) => {
 
       <View style={styles.helpContainer}>
         <TouchableOpacity 
-        onPress={navigateToSignUp}
+        onPress={()=>{navigateToSignUp}, console.log("pressing")}
         style={styles.help}>
-          <Text style={styles.loginText}>Don't have an account? Sign up.</Text>
+          <Text 
+            
+          style={styles.loginText}>Don't have an account? Sign up.</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.help}>

@@ -5,7 +5,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import UserProvider from '../../user/UserProvider';
 
 import Home from './HomeScreen';
-import Login from './Login';
+import LoginScreen from './Login';
 import SendTokens from './SendTokens.js';
 import SettingsScreen from'./SettingsScreen.js';
 import Contacts from './Wallet/Contacts'
@@ -60,7 +60,10 @@ export default function Navigator() {
           {user === null ? (
             <>
               <Drawer.Screen name="Login">
-                {(props) => <Login setUser={setUser} />}
+                {(props) => <LoginScreen setUser={setUser}
+                //component={LoginScreen}
+                />}
+               
               </Drawer.Screen>
             </>
           ) : (
@@ -71,7 +74,7 @@ export default function Navigator() {
               <Drawer.Screen name="SendTokens" component={SendTokens} />
               <Drawer.Screen name="Settings" component={SettingsScreen} />
               {/*<Drawer.screen name="Pay Vendor" component={PayVendor}/>*/}
-              {/*<Drawer.Screen name="Sign Up" component={SignUpScreen}/>*/}
+              <Drawer.Screen name="Sign Up" component={SignUpScreen}/>
                
               
               {/* Redeem */}
