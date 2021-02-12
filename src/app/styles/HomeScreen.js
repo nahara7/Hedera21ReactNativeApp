@@ -38,12 +38,12 @@ export default StyleSheet.create({
   ProfileImageNotification: {
     height: 12,
     width: 12,
-    backgroundColor: Colors.orange,
+    backgroundColor: '#ffb703',
     borderRadius: 6,
     position: "absolute",
     right: 6,
     borderWidth: 2,
-    borderColor: 'white',
+    borderColor: '#ffb703',
   },
 
   SlideUp: {

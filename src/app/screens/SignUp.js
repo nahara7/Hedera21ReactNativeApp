@@ -54,13 +54,19 @@ export default SignUpScreen = ({Navigation}) => {
   const [errortext, setErrortext] = useState("");
   const [userRetypePassword, setUserRetypePassword] = useState("");
   const [isRegistraionSuccess, setIsRegistraionSuccess] = useState(false);
-
+  const[firstName, setFirstName]=useState("");
+  const[lastName, setLastName]= useState("");
+  
+  const userNameInputRef=createRef();
   const emailInputRef = createRef();
   const typeInputRef = createRef();
   const passwordInputRef = createRef();
   const userRetypePasswordInputRef = createRef();
+  const firstNameInputRef=createRef();
+  const lastNameInputRef=creatRef();
     
-    const handleSubmitButton = () => {
+  
+  const handleSubmitButton = () => {
     setErrortext("");
     if (!userName) {
       alert("Please fill Name");
@@ -125,7 +131,9 @@ export default SignUpScreen = ({Navigation}) => {
     body: JSON.stringify({
       username: userName,
       password: userPassword,
-      email: userEmail
+      email: userEmail,
+      firstname: firstName,
+      lastname: lastName
 
     })
   })
@@ -162,6 +170,40 @@ export default SignUpScreen = ({Navigation}) => {
       />
 
       <View style={[styles.container, { paddingTop: 200 }]}>
+        
+      <View style={styles.inputView}>
+          <TextInput
+            style={[styles.inputText]}
+            onChangeText={(FirstName) => setFirstName(FirstName)}
+            keyboardType="email-address"
+            returnKeyType="next"
+            placeholder="Enter Firstname"
+            placeholderTextColor="white"
+            underlineColorAndroid="transparent"
+            onSubmitEditing={() =>
+             LastNameInputRef.current && lastNameInputRef.current.focus()
+            }
+            blurOnSubmit={false}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={[styles.inputText]}
+            onChangeText={(LastName) => setLastName(LastName)}
+            keyboardType="email-address"
+            returnKeyType="next"
+            placeholder="Enter Lastname"
+            placeholderTextColor="white"
+            underlineColorAndroid="transparent"
+            ref={lastNameInputRef}
+            onSubmitEditing={() =>
+             userNameInputRef.current && userNameInputRef.current.focus()
+            }
+            blurOnSubmit={false}
+          />
+        </View>
+        
+        
         <View style={styles.inputView}>
           <TextInput
             style={[styles.inputText]}
@@ -171,6 +213,7 @@ export default SignUpScreen = ({Navigation}) => {
             placeholder="Enter username"
             placeholderTextColor="white"
             underlineColorAndroid="transparent"
+            ref={userNameInputRef}
             onSubmitEditing={() =>
               emailInputRef.current && emailInputRef.current.focus()
             }

@@ -285,14 +285,13 @@ const Users = [
               }}
               style={styles.ProfileImage}
             />
-            <Text style={{color: 'black'}}>AccountId</Text>
-            <Text style={{ color: "black", paddingLeft: 20, fontWeight: 'bold'}}>
-              
-              0.0.71134
+            <Text style={{font: 'Open Sans',color: 'white', fontStyle: 'bold', paddingLeft: 50, paddingTop: 40 }}>AccountID 0.0.3426</Text>
+            <Text style={{ fontSize: 36, font: 'Open Sans', color: "white", fontWeight: 'bold', paddingBottom: 20, paddingLeft:145, position: 'absolute'}}>
+            0.0.71134
             </Text>
-            <View style={{paddingTop: 90, position: 'absolute',  justifyContent: 'center',paddingRight: 15}}>
+            <View style={{paddingTop: 90, position: 'absolute',  justifyContent: 'center', paddingLeft: 50}}>
             <Image 
-            style={{width: 300, justifyContent: 'center'}}
+            style={{width: 200, justifyContent: 'center'}}
             source={require('./Group.png')}></Image>
             </View>
             <View style={styles.ProfileImageNotification}></View>
