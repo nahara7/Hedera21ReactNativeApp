@@ -93,9 +93,7 @@ const  LoginScreen = (props) => {
   
 
   function navigateToSignUp() {
-   //Navigator.current?.navigate('Sign Up');
-   //console.log('about to navigate')
-  this.props.navigation.navigate("SignUp")
+  navigation.navigate("SignUp")
   }
   
   function handleLogin() {
@@ -149,13 +147,13 @@ const  LoginScreen = (props) => {
       </View>
 
       <View style={styles.helpContainer}>
-        <TouchableOpacity 
+        <TouchableWithoutFeedback
         onPress={navigateToSignUp}
         style={styles.help}>
           <Text 
             
           style={styles.loginText}>Don't have an account? Sign up.</Text>
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
 
         <TouchableOpacity style={styles.help}>
           <Text style={styles.forgot}>Forgot Password?</Text>
