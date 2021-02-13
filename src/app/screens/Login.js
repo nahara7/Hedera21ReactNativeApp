@@ -93,9 +93,9 @@ const  LoginScreen = (props,{navigation}) => {
   
 
   function navigateToSignUp() {
-   Navigator.current?.navigate('Sign Up');
-   console.log('about to navigate')
-   //this.props.navigation.navigate('Sign Up')
+   //Navigator.current?.navigate('Sign Up');
+   //console.log('about to navigate')
+  navigation.navigate('Sign Up')
   }
   
   function handleLogin() {
