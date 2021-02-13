@@ -60,11 +60,12 @@ export default StyleSheet.create({
 
   SlideUp: {
     padding: 10,
+    marginHorizontal: 10,
     paddingTop: 0,
 
     flex: 1,
     backgroundColor: Colors.white,
-    borderColor: Colors.gray,
+    borderColor: Colors.orange,
     borderWidth: 1,
     borderRadius: 24,
   },
@@ -80,7 +81,7 @@ export default StyleSheet.create({
 
   PanelItemContainer: {
     borderWidth: 0.4,
-    borderColor: Colors.gray,
+    borderColor: Colors.lightOrange,
     padding: 14,
     borderRadius: 6,
     flexDirection: "row",

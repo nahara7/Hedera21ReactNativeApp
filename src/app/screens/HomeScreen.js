@@ -397,7 +397,7 @@ const Users = [
               
               
               </View>
-       {/* <SlidingUpPanel
+       <SlidingUpPanel
           
           ref={ModalRef}
           draggableRange={dragRange}
@@ -493,7 +493,7 @@ const Users = [
               </TouchableOpacity>
             </View>
           </View>
-              </SlidingUpPanel>*/}
+              </SlidingUpPanel>
              
   </SafeAreaView>
   );
