@@ -5,11 +5,11 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import UserProvider from '../../user/UserProvider';
 
 import Home from './HomeScreen';
-import LoginScreen from './Login';
+import Login from './Login';
 import SendTokens from './SendTokens.js';
 import SettingsScreen from'./SettingsScreen.js';
 import Contacts from './Wallet/Contacts'
-import SignUpScreen from './SignUp.js';
+import SignUp from './SignUp.js';
 //import PayVendor from './PayVendor.js';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -59,12 +59,14 @@ export default function Navigator() {
         >
           {user === null ? (
             <>
+           
               <Drawer.Screen name="Login">
-                {(props) => <LoginScreen setUser={setUser}
+                {(props) => <Login setUser={setUser}
                 //component={LoginScreen}
                 />}
-               
+                 
               </Drawer.Screen>
+              <Drawer.Screen name="SignUp" component={SignUp} />
             </>
           ) : (
             <>
@@ -74,7 +76,7 @@ export default function Navigator() {
               <Drawer.Screen name="SendTokens" component={SendTokens} />
               <Drawer.Screen name="Settings" component={SettingsScreen} />
               {/*<Drawer.screen name="Pay Vendor" component={PayVendor}/>*/}
-              <Drawer.Screen name="Sign Up" component={SignUpScreen}/>
+              
                
               
               {/* Redeem */}

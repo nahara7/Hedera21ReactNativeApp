@@ -38,7 +38,7 @@ import {
   TouchableNativeFeedback,
 } from "react-native-gesture-handler";
 
-export default SignUpScreen = ({Navigation}) => {
+export default SignUpScreen = ({navigation}) => {
   var Airtable = require("airtable");
   Airtable.configure({
     endpointUrl: "https://api.airtable.com",
@@ -375,4 +375,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-//export default SignUpScreen;

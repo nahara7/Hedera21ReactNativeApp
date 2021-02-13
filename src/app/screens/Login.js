@@ -35,7 +35,7 @@ import Airtable from 'airtable'
 const data = require('./DataController.js');
 import {useNavigation} from '@react-navigation/native';
 import Navigator from './Navigator.js'
-
+import SignUp from './SignUp.js'
 
 const base = new Airtable({
   apiKey:"keykefT9YD5rhkuFg",
@@ -78,8 +78,8 @@ const authenticate = async (email, username) => {
     username: user.get("username"),
   };
 };
-const  LoginScreen = (props,{navigation}) => {
-  const {setUser} = props
+const  LoginScreen = (props) => {
+  const {navigation, setUser} = props
   const [userPassword, setUserPassword] = useState("");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -95,7 +95,7 @@ const  LoginScreen = (props,{navigation}) => {
   function navigateToSignUp() {
    //Navigator.current?.navigate('Sign Up');
    //console.log('about to navigate')
-  navigation.navigate('Sign Up')
+  this.props.navigation.navigate("SignUp")
   }
   
   function handleLogin() {
@@ -150,7 +150,7 @@ const  LoginScreen = (props,{navigation}) => {
 
       <View style={styles.helpContainer}>
         <TouchableOpacity 
-        onPress={()=>{navigateToSignUp}, console.log("pressing")}
+        onPress={navigateToSignUp}
         style={styles.help}>
           <Text 
             
