@@ -56,7 +56,7 @@ export default StyleSheet.create({
   AddUser: {
     //keep this for orange buttons on home screen
     height: 140,
-    width: 100,
+    width: 96,
     borderColor: "#fcbf49",
     //borderColor: Colors.grey,
     borderWidth: 1,

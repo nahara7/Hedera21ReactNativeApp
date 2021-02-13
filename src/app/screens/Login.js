@@ -111,7 +111,13 @@ const  LoginScreen = (props,{navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>TOKA</Text>
-
+      <View style={{paddingTop: 130, position: 'absolute', marginBottom: 30 }}>
+      <Image style={{width: 150, height: 80}}
+     
+      source={require('./multicolor.png')}
+      >
+</Image>
+      </View>
       <View style={styles.loginContainer}>
         <View style={styles.inputView}>
           <TextInput

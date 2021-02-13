@@ -66,7 +66,7 @@ const getuserBalance =  (userId) => {
   //TO DO -- render
   let user='recoBCkJWolsRETIr' 
   console.log('executing')
-  return fetch ('http://localhost:8080/api/v1.0/account/userBalance/',{
+  return fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/account/userBalance/',{
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -259,8 +259,8 @@ const Users = [
   };
 
   const [dragRange, setDragRange] = useState({
-    top: height - 80,
-    bottom: 160,
+    top: height - 60,
+    bottom: 120,
   });
 
   const _draggedValue = new Animated.Value(180);
@@ -274,7 +274,7 @@ const Users = [
       <View>
         <View style={[SharedStyle.header,  {paddingTop: 45}]}>
           
-          <Text style={SharedStyle.TitleText}>Welcome back,</Text>
+          <Text style={SharedStyle.TitleText}>Welcome back</Text>
         </View>
         <TouchableOpacity>
           <View style={styles.profile}>
@@ -310,7 +310,7 @@ const Users = [
         </TouchableOpacity>
         </View>
 
-        <View style={{paddingBottom: 100}}>
+        <View style={{paddingBottom: 20}}>
           <View style={SharedStyle.CardDisplay}>
             <FlatList
               contentContainerStyle={SharedStyle.CardContentList}
@@ -338,7 +338,7 @@ const Users = [
             />
 
             <FlatList
-             style={{paddingBottom: 10}}
+             style={{paddingBottom: 50}}
               contentContainerStyle={SharedStyle.CardContentList}
               horizontal
               data={Users}
@@ -362,7 +362,7 @@ const Users = [
        
       
      {/*<Container style={{ flex: 1, flexDirection: 'column', width:400, height: 70, paddingTop: 0}}>*/}
-       <View style={{paddingTop:40, width: "90%", alignSelf: "center", backgroundColor: 'white'}}>
+       <View style={{paddingTop:30, width: "90%", alignSelf: "center", backgroundColor: 'white'}}>
         <Footer style={{backgroundColor: 'white'}}>
         <FlatList
               contentContainerStyle={SharedStyle.CardContentList}
