@@ -42,9 +42,9 @@ export default SignUpScreen = ({navigation}) => {
   var Airtable = require("airtable");
   Airtable.configure({
     endpointUrl: "https://api.airtable.com",
-    apiKey: "keykefT9YD5rhkuFg",
+    apiKey: "AIRTABLE_API_KEY",
   });
-  var base = Airtable.base("appg4L9uWpNhonYHS");
+  var base = Airtable.base("AIRTABLE_BASE_KEY");
   const userTable = base("Users");
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
