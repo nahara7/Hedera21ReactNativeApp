@@ -29,39 +29,6 @@ import { Share } from "react-native";
 import {Footer, Title, Container} from 'native-base';
 
 
-//import {Icon, Container, Header, Content, Right} from 'native-base';
-
-
-/*function  getuserAccountId(loggedInUser){
- 
-  console.log('in accountId function');
-  console.log(loggedInUser);
-  return fetch ('https://still-coast-11655.herokuapp.com/api/v1.0/account/userAccountId/',{
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      baseId:loggedInUser
-      
-    })
-   }) .then((response)=> response.text()
-      .then((responseJson)=>{
-        console.log('getting user account id')
-        var accountId=responseJson;
-        return accountId
-        
-        //update global var
-        console.log(accountId);
-        
-      })
-      .catch((error)=>{
-        console.error(error)
-      }),
-   )}*/
-
-
 const getuserBalance =  (userId) => {
   //TO DO -- render
   let user='recoBCkJWolsRETIr' 
@@ -146,49 +113,6 @@ const getuserBalance =  (userId) => {
           console.error(error)
         }),
      )}
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-  /*var userAccountId="1";
-  //accountId(user.id)
-  useEffect(()=>{
-  accountId()
-  })
-  const accountId =()=>{
-  //const user=useUser
-    console.log("in accountid")
-    getuserAccountId(user.id)
-      .then((HederaId)=>{
-        setUserAccountId(HederaId)
-      })
-      console.log(userAccountId)
-     }
-    /*getuserAccountId(userId)
-    .then((HederaId)=>{
-      setUserAccountId(HederaId)
-    })*/
-       //console.log(HederaId)
-   
-   
-   /*function setUserAccountId(accId){
-    console.log(userAccountId)
-    userAccountId=accId
-    console.log(userAccountId + "setting the var")
-   }
-  console.log(user.id)*/
-  //const [userAccountId, setUserAccountId]=useState("");
-  
-  {/*useEffect(()=>{
-    getuserAccountId(user).then((AccountId)=>{setUserAccountId(AccountId)
-  })
-},[user]);*/}
   
 const Users = [
     {
