@@ -32,8 +32,8 @@ const getRecipientInfo= async (recAccountId)=>{
     console.log(recAccountId)
     let recId="";
   const base = new Airtable({
-    apiKey:"keykefT9YD5rhkuFg",
-  }).base('appg4L9uWpNhonYHS');
+    apiKey:"AIRTABLE_API_KEY",
+  }).base('AIRTABLE_BASE_KEY');
   const table = base('Users'); 
  
   const options = {
