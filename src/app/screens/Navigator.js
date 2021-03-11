@@ -61,8 +61,8 @@ export default function Navigator() {
             <>
            
               <Drawer.Screen name="Login">
-                {(props) => <Login setUser={setUser}
-                //component={LoginScreen}
+                {(props) => <Login {...props} setUser={setUser}
+                
                 />}
                  
               </Drawer.Screen>
@@ -72,9 +72,9 @@ export default function Navigator() {
             <>
               {/* <UserProvider user={user} /> if you need to propagate user data through context */}
               <Drawer.Screen name="Home" component={Home} />
-              <Drawer.Screen name="Contacts" component={Contacts} />
+              {/*<Drawer.Screen name="Contacts" component={Contacts} />*/}
               <Drawer.Screen name="SendTokens" component={SendTokens} />
-              <Drawer.Screen name="Settings" component={SettingsScreen} />
+             {/* <Drawer.Screen name="Settings" component={SettingsScreen} />*/}
               {/*<Drawer.screen name="Pay Vendor" component={PayVendor}/>*/}
               
                

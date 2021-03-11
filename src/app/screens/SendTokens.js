@@ -83,7 +83,7 @@ const getRecipientInfo= async (recAccountId)=>{
       }),
       
    )
-   //return firstname
+  
   };
   
 
@@ -155,7 +155,7 @@ const transaction =  ( userId, recId, recName, transactionToken, transactionAmou
   }
 ];
 
-//export default SendTokens = () => {
+
   
   
   
@@ -176,22 +176,17 @@ const transaction =  ( userId, recId, recName, transactionToken, transactionAmou
   var recipientId="save";
    function handleTransaction(){
     console.log('handleTransaction')
-    //var recipientName='save';
-    //var recipientId='save';
+    
      getRecipientInfo(recipientAccountId)
      .then((RecipientId)=>{
       setRecipientId(RecipientId)
-      //console.log("after function"+ recipientId)
+     
      
         
       })
       console.log(recipientName + "handle Transaction")
     
-    //console.log(recipientId + "back at handle")
-    //console.log({userId: user.id,recipientId, recipientName, token, amount, memo})
-    //transaction(user.id,recipientId,recipientName, token, amount, memo)
-      //.then(() => {})
-    //};
+  
   function setRecipientId(RecId){
     console.log("setting Id")
      recipientId=RecId;
@@ -221,7 +216,7 @@ function handleRecipientAccountId(){
 })};
   return (
     <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
-      <View style={[SharedStyle.header, {paddingTop:45, paddingLeft: 20}]}>
+      <View style={[SharedStyle.header, {paddingTop:20, paddingLeft: 20}]}>
         <Text style={SharedStyle.TitleText}>
               Send Tokens
         </Text>
@@ -254,7 +249,7 @@ function handleRecipientAccountId(){
       </View>
       
 
-      <View style={[styles.form, {paddingBottom: 45}]}>
+      <View style={[styles.form, {paddingBottom: 40}]}>
         
       <View style={SharedStyle.InputView}>
           <TextInput
@@ -271,7 +266,7 @@ function handleRecipientAccountId(){
         <View style={SharedStyle.InputView}>
           <TextInput
             style={SharedStyle.InputText}
-            placeholder="Choose Token"
+            placeholder="Token Name"
             placeholderTextColor="white"
             onChangeText={(Token)=> setToken(Token)}
             ref={tokenIdInputRef}

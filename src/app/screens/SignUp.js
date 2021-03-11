@@ -162,7 +162,6 @@ export default SignUpScreen = ({navigation}) => {
       <Header
         style={styles.logo}
         backgroundColor="white"
-        leftComponent={{ icon: "chevron-left", color: "black", size: 50 }}
         centerComponent={{
           text: "SIGN UP",
           style: { fontWeight: "bold", fontSize: 30, color: "#ff9100" },
@@ -278,7 +277,7 @@ export default SignUpScreen = ({navigation}) => {
       <TouchableOpacity
         style={[styles.signUpButtonStyle, { marginTop: 215 }]}
         activeOpacity={0.5}
-        onPress={(console.log("creating account"), handleSubmitButton)}
+        onPress={(console.log("creating account"),Alert.alert("Account Successfully Created. Please log in."),handleSubmitButton)}
       >
         <Text style={[styles.loginText, { paddingTop: 10 }]}>SIGN UP</Text>
       </TouchableOpacity>

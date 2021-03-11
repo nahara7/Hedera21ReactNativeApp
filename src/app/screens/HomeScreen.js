@@ -272,31 +272,21 @@ const Users = [
   return (
     <SafeAreaView style={[SharedStyle.container, {backgroundColor: 'white'}]}>
       <View>
-        <View style={[SharedStyle.header,  {paddingTop: 45}]}>
+        <View style={[SharedStyle.header,  {paddingTop: 37}]}>
           
           <Text style={SharedStyle.TitleText}>Welcome back</Text>
         </View>
         <TouchableOpacity>
           <View style={styles.profile}>
             <View style={styles.profileInfo}>
-              <Image
-                source={{
-                  uri:
-                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.tokenmaker.org%2F&psig=AOvVaw2ojmkB3vglEYfnxn7o0Dd0&ust=1613254220488000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJD0xLqu5e4CFQAAAAAdAAAAABAD",
-                }}
-                style={styles.ProfileImage}
-              />
-              <Text style={{color: 'white',  paddingLeft: 50, paddingTop: 40 }}>AccountID 0.0.3426</Text>
+              
+              <Text style={{color: 'white',  paddingLeft: 50, paddingTop: 40 }}>AccountID 0.0.305381</Text>
               <Text style={{ fontSize: 36, font: 'Open Sans', color: "white", fontWeight: 'bold', paddingBottom: 20, paddingLeft:185, position: 'absolute'}}>
                 25 JVT
               </Text>
               <View style={styles.ProfileImageNotification}></View>
             </View>
-            <View>
-              <Image 
-              style={{width: 200, justifyContent: 'center'}}
-              source={require('./Group.png')}></Image>
-            </View>
+           
           </View>
         {/*<View style={{ backgrounColor: 'white', justifyContent: 'center', paddingLeft: 515, paddingTop: 490, alignItems: 'center', flex: 1, position: 'absolute'}}>
         <TouchableOpacity style={{ position: 'absolute', paddingBottom: 10, backgroundColor: 'white'}}>
@@ -310,7 +300,7 @@ const Users = [
         </TouchableOpacity>
         </View>
 
-        <View style={{paddingBottom: 20}}>
+        <View style={{paddingBottom: 200}}>
           <View style={SharedStyle.CardDisplay}>
             <FlatList
               contentContainerStyle={SharedStyle.CardContentList}
@@ -338,7 +328,7 @@ const Users = [
             />
 
             <FlatList
-             style={{paddingBottom: 50}}
+             style={{paddingBottom: 20}}
               contentContainerStyle={SharedStyle.CardContentList}
               horizontal
               data={Users}
@@ -404,7 +394,7 @@ const Users = [
           animatedValue={_draggedValue}
           backdropOpacity={0}
           snappingPoints={[360]}
-          height={height + 20}
+          height={height}
           friction={0.9}
         >
           <View style={styles.SlideUp}>
