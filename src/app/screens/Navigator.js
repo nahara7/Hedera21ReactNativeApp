@@ -13,27 +13,7 @@ import SignUp from './SignUp.js';
 //import PayVendor from './PayVendor.js';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-//import PayVendor from './SendTokensVendor.js';
 
-//fix navigator and do not import navigator in other classes
-//must determine how to implement into homescreen so that you can 
-//move from opacity buttons.
-//perhaps make a seperate stack navigator for the homescreen to go to 
-//wallet pages  Feb 2 2021
-
-// const NavStack= createDrawerNavigator({
-//   Settings: {screen: SettingsScreen},
-//   SendTokens:{screen: SendTokens},
-//     //Home: {screen: Home},
-//   }, {
-//       //initialRouteName:'Home',
-//       contentOptions:{
-//       activeTintColor: '#e91e63',
-//       drawerBackgroundColor: "#f4511e",
-//       drawerPosition: 'left',
-//       overLayColor: "transparent"
-//     }
-//  });
 
 const Drawer = createDrawerNavigator();
 
