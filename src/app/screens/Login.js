@@ -38,8 +38,8 @@ import Navigator from './Navigator.js'
 import SignUp from './SignUp.js'
 
 const base = new Airtable({
-  apiKey:"keykefT9YD5rhkuFg",
-}).base('appg4L9uWpNhonYHS');
+  apiKey:"AIRTABLE_API_KEY",
+}).base('AIRTABLE_BASE_KEY');
 const table = base('Accounts');
 
 //import Airtable from '../airtable'
